@@ -14,6 +14,7 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
+        Role::create(['name' => 'writer']);
 
         $role = Role::create(['name' => 'commander']);
         $user = \App\Models\User::factory()->create([
@@ -28,14 +29,6 @@ class AdminSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@admin.com',
             'password' => bcrypt('password'),
-        ]);
-        $user->assignRole($role);
-
-        $role = Role::create(['name' => 'user']);
-        $user = \App\Models\User::factory()->create([
-            'name' => 'rrezon',
-            'email' => 'rrezon@user.com',
-            'password' => bcrypt('12345'),
         ]);
         $user->assignRole($role);
 
