@@ -13,14 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
-
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-Route::get('/welcome', function () {
+Route::get('/', function () {
     return view('welcome');
-})->middleware(['auth:sanctum', 'role:user'])->name('welcome');
+});
