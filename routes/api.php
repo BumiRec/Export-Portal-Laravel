@@ -1,11 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ListController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -18,19 +15,44 @@ use App\Http\Controllers\ListController;
 |
 */
 
-Route::middleware(['role:admin', 'auth:sanctum'])->group(function () {
-    Route::post('/list/dummy', [ListController::class, 'dummy_method']);
-});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 
+Route::post('/login', [AuthController::class, 'login']);
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::post('/list/show', [ListController::class, 'show']);
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
-Route::post('/login', [AuthController::class, 'login']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Route::group(['middleware' => ['auth:sanctum']], function () {
+//     Route::post('/logout', [AuthController::class, 'logout']);
+// });
+
+
+// Route::post('/login', [AuthController::class, 'authenticate']);
+
+
+// Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+// Route::post('login', [AuthController::class, 'login']);
+// Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+// Route::get('welcome', function () {
+//     return view('welcome');
+// })->middleware('auth')->name('welcome');
+
+

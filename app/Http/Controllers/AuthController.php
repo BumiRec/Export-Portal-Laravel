@@ -4,39 +4,37 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
 
     public function login(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+        $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string',
         ]);
 
-        if (Auth::attempt($credentials)) {
-            session()->regenerate();
+        $credentials = $request->only('email', 'password');
 
-            // $request->session()->regenerate();
-
-            return response()->json(['message' => 'Welcome new user']);
+        if (!Auth::attempt($credentials)) {
+            throw ValidationException::withMessages([
+                'email' => ['The provided credentials are incorrect.'],
+            ]);
         }
 
-        throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.'],
-        ]);
+        
+
+        $user = User::where('email', $request->email)->firstOrFail();
+        $token = $user->createToken('authToken')->plainTextToken;
+
+        return response()->json(['token' => $token], 200);
     }
 
-    public function logout()
-    {
-        auth()->logout(); //logout the currently authenticated user
+    public function logout(Request $request): RedirectResponse
+{
+    $request->user()->currentAccessToken()->delete();
 
-        session()->invalidate(); //invalidate the session
-
-        session()->regenerateToken(); //regenerate token
-
-        return response()->json(['success' => 'Logged out'], 200);
-    }
+    return redirect()->route('login');
+}
 }

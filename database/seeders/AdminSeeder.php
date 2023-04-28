@@ -18,8 +18,8 @@ class AdminSeeder extends Seeder
 
         $role = Role::create(['name' => 'commander']);
         $user = \App\Models\User::factory()->create([
-            'name' => 'rezon',
-            'email' => 'rezon@user.com',
+            'name' => 'rrezon',
+            'email' => 'rrezon@user.com',
             'password' => bcrypt('123'),
         ]);
         $user->assignRole($role);
