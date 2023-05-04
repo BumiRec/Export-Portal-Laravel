@@ -19,7 +19,6 @@ class AddProductTest extends TestCase
              'price' => 299,
              'imageURL' => 'Ermira654',
              'views' => 3,
-
              'category_id' => 2,
              'company_id' => 4
          ]);
