@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 class CompanyController extends Controller
 {
     function company (Request $request){
-        $validator = Validator::make( 
+      $validator = Validator::make(
             $request->all(),
         [
            'name'=> 'required|string|max:255',
@@ -24,8 +24,7 @@ class CompanyController extends Controller
             'category_id'=> 'required|integer',
             'subcategory_id'=> 'required|integer',
         ]);
-
-        if ($validator->fails()) {
+       if ($validator->fails()) {
             return response() -> json(['errors' => $validator->errors()], 400);
         }
 
