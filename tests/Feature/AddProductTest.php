@@ -11,7 +11,7 @@ class AddProductTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function test_example(): void
+    public function test_add_a_product(): void
     {
        $response = $this->post('http://127.0.0.1:8000/api/add', [
              'name' => 'Ermira',
