@@ -12,8 +12,17 @@ class ViewController extends Controller
     function view($id)
     {
         $product = Product::find($id);
-        $views = $product ? $product->views : null;
-        return response()->json(['views' => $views]);
+        if($product){
+            $product  -> increment('views');
+            $views = $product -> views;
+            return response()->json(['views' => $views]);
+        }
+
+        else{
+            return response()->json(['views' => $views]);
+        }
+        // $views = $product ? $product->views : null;
+        // return response()->json(['views' => $views]);
     }
 
     function date($id)
