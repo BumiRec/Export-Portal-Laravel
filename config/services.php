@@ -31,4 +31,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    // 'captcha' => [
+    //     'sitekey' => env('6LfQG6IlAAAAAI3gpbAOJm40Ql1BwD7G9DhtAQh1'),
+    //     'secret' => env('6LfQG6IlAAAAAAJXabKrAfbTQ2B158lEVDXVMOzb'),
+    // ],
+    
+
 ];
