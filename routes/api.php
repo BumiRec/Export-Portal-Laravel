@@ -15,6 +15,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AddProduct;
 use App\Http\Controllers\ModifyItem;
+use App\Http\Controllers\FilterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,3 +80,5 @@ Route::get('/productcategory', [CategoryController::class, 'productcategory']);
 Route::post('/activity', [ActivityController::class, 'activitycontroller']);
 
 Route::post('/add', [AddProduct::class,'AddProduct']);
+
+Route::get('/filterProduct/{id}', [FilterController::class, 'filterProduct']);
