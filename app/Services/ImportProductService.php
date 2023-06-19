@@ -25,7 +25,7 @@ class ImportProductService
                 'p.created_at'])
                 ->paginate(10);
 
-        return ImportResource::collection($importProducts);
+        return ($importProducts);
     }
 
     public function importProduct($id)
