@@ -2,30 +2,30 @@
 namespace App\Services;
 
 use App\Http\Requests\AuthRequest;
-use App\Services\ChangeLanguageService;
-use Illuminate\Support\Facades\App;
+use App\Models\UserLanguage;
 use Illuminate\Support\Facades\Auth;
 
 class AuthService
 {
-    public function createAuth(AuthRequest $authRequest, $languageId)
-    {
-        $changeLanguage = new ChangeLanguageService;
-        $changeLanguage->changeLanguage($languageId);
+    public function createAuth(AuthRequest $authRequest)
+{
+    $credentials = $authRequest->validated();
 
-        $credentials = $authRequest->validated();
+    if (Auth::attempt($credentials)) {
+        session()->regenerate();
 
-        if (Auth::attempt($credentials)) {
-            session()->regenerate();
-            $user = [
-                'message' => __('messages.welcome'),
-                'user'    => Auth::user(),
-            ];
+        $user = Auth::user();
 
-            return $user;
-        }
+        // Retrieve the language ID using the UserLanguage model
+        $languageId = UserLanguage::where('user_id', $user->id)->value('language_id');
 
-        return response()->json(['error' => __('messages.error')], 401);
+        $responseData = [
+            'message'     => __('messages.welcome'),
+            'user'        => $user,
+            'language_id' => $languageId,
+        ];
+
+        return $responseData;
     }
-
+}
 }

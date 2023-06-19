@@ -144,7 +144,7 @@ Route::get('/updateLanguage/{userId}/{languageId}', [UpdateLanguageController::c
 Route::post('/register', [RegisterController::class, 'register']);
 
 //Login
-Route::post('/login/{language}', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'login']);
 
 //Logout
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
