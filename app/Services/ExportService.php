@@ -24,7 +24,7 @@ class ExportService
                 'p.created_at'])
             ->paginate(10);
 
-        return ExportResource::collection($exportProducts);
+        return ($exportProducts);
 
     }
 
