@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Services\CompanyFilterService;
-use Illuminate\Support\Facades\App;
 
 class CompanyFilterController extends Controller
 {
@@ -13,8 +12,8 @@ class CompanyFilterController extends Controller
     {
         $this->companyFilterService = $companyFilterService;
     }
-    public function filterCompany(CompanyFilterService $companyFilterService, $id, $languageId)
+    public function filterCompany(CompanyFilterService $companyFilterService, $id)
     {
-        return response()->json($this->companyFilterService->companyFilter($id, $languageId), 200);
+        return response()->json($this->companyFilterService->companyFilter($id), 200);
     }
 }

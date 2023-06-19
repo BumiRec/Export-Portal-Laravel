@@ -94,7 +94,7 @@ Route::get('/CompanyList', [CompanyListController::class, 'companyList']);
 Route::get('/subcategory/{c_id}/{s_id}', [FilterProductController::class, 'filterProductSubCategory']);
 
 //Filter company base on category
-Route::get('/filterCompany/{id}/{lang}', [CompanyFilterController::class, 'filterCompany']);
+Route::get('/filterCompany/{id}', [CompanyFilterController::class, 'filterCompany']);
 
 Route::get('/filterProduct/{id}', [FilterProductController::class, 'filterProductCategory']);
 
