@@ -13,8 +13,8 @@ class ListNotificationsController extends Controller
     {
         $this->notificationService = $notificationService;
     }
-    public function findNotifications(NotificationService $notificationService, $id, $languageId)
+    public function findNotifications(NotificationService $notificationService, $id, $notificationId, $languageId)
     {
-        return response()->json($this->notificationService->notification($id, $languageId), 200);
+        return response()->json($this->notificationService->notification($id, $notificationId, $languageId), 200);
     }
 }

@@ -22,6 +22,7 @@ use App\Http\Controllers\ListNotificationsController;
 use App\Http\Controllers\MailFormController;
 use App\Http\Controllers\ModifyItem;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\NotificationSystemController;
 use App\Http\Controllers\NotifyBuyerInterested;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProductController;
@@ -111,7 +112,7 @@ Route::get('/interstedIn/{id}', [InterestedInListController::class, 'interestedI
 Route::get('/form/{id}', [MailFormController::class, 'mailForm']);
 
 //Get the the Notifications for the Owner
-Route::get('/Notify/{id}/{lang}', [ListNotificationsController::class, 'findNotifications']);
+Route::get('/Notify/{id}/{n_id}/{lang}', [ListNotificationsController::class, 'findNotifications']);
 
 //
 Route::get('/corporate/{id}', [CorporateController::class, 'showCorporate']);
@@ -122,6 +123,8 @@ Route::get('/successStory', [SuccessStoriesController::class, 'successStories'])
 Route::get('/allFiles', [FileGetDataController::class, 'showAllFiles']);
 
 Route::get('/showFiles/{productId}/{fileType}', [FileGetDataController::class, 'showIndexFile']);
+
+Route::get('/notificatiOnOff/{userId}', [NotificationSystemController::class, 'NotificatiOnOff']);
 
 //Update product
 Route::put('/product/{id}', [ModifyItem::class, 'update']);

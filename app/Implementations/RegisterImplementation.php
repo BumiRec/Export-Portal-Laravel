@@ -7,6 +7,7 @@ use App\Interfaces\RegisterInterface;
 use App\Models\Token;
 use App\Models\User;
 use App\Models\UserLanguage;
+use App\Models\UserNotification;
 use App\Models\UsersToken;
 
 class RegisterImplementation implements RegisterInterface
@@ -36,6 +37,10 @@ class RegisterImplementation implements RegisterInterface
             UserLanguage::create([
                 'user_id'     => $user->id,
                 'language_id' => 1,
+            ]);
+            UserNotification::create([
+                'user_id'     => $user->id,
+                'system' => 1,
             ]);
         }
 
