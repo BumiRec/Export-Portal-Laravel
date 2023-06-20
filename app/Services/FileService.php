@@ -11,10 +11,13 @@ class FileService
 {
     public function AddFile(FileRequest $request)
     {
-        // $storedData = Session::get('stored_data');
+        $storedData = $request->session()->get('stored_data');
 
-        // if ($storedData) {
-        // $productId = $this->processData($storedData)
+        if (!$storedData) {
+            return response()->json(['error' => __('messages.noStoredData')], 400);
+        }
+
+        $productId = $this->processData($storedData)['id'];
 
         $files = $request->file('files');
 
@@ -40,7 +43,7 @@ class FileService
 
             FileHasProduct::create([
                 'file_id'    => $uploadedFile->id,
-                'product_id' => 4,
+                'product_id' => $productId,
             ]);
 
             FileHasType::create([
@@ -50,18 +53,11 @@ class FileService
         }
         return response()->json(['message' => __('messages.FileUploaded')], 201);
     }
-    // private function processData($data)
-// {
-//     $processedData = [];
+    private function processData($data)
+    {
+        $processedData = $data;
 
-//     foreach ($data as $item) {
+        return $processedData;
+    }
 
-//         $processedItem = $item;
-
-//         $processedData[] = $processedItem;
-//     }
-
-//     return $processedData;
-// }
-// }
 }
