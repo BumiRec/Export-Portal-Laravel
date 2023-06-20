@@ -112,7 +112,7 @@ Route::get('/interstedIn/{id}', [SellerListListController::class, 'interestedIn'
 Route::get('/form/{id}', [MailFormController::class, 'mailForm']);
 
 //Get the the Notifications for the Owner
-Route::get('/Notify/{id}/{n_id}/{lang}', [ListNotificationsController::class, 'findNotifications']);
+Route::get('/Notify/{id}/{lang}', [ListNotificationsController::class, 'findNotifications']);
 
 //
 Route::get('/corporate/{id}', [CorporateController::class, 'showCorporate']);
