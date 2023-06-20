@@ -1,13 +1,13 @@
 <?php
 namespace App\Services;
 
-use App\Models\InterestedIn;
+use App\Models\SellerList;
 
-class InterestedInService 
+class SellerService 
 {
     public function showInterestedIn($id)
     {
-        $interested_in = InterestedIn::join('product', 'product.id', 'interested_in.product_id')
+        $interested_in = SellerList::join('product', 'product.id', 'interested_in.product_id')
             ->join('buyer_confirm', 'buyer_confirm.id', 'interested_in.buyer_id')
             ->join('company', 'company.id', 'interested_in.company_id')
             ->join('users', 'users.id', 'buyer_confirm.user_id')
