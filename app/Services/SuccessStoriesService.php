@@ -13,7 +13,7 @@ class SuccessStoriesService{
         $numPages = $successStory->lastPage();
         return [
             'numPages' => $numPages,
-            'exportProducts' => $successStory,
+            'SuccessStory' => $successStory,
         ];
     }
 }

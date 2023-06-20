@@ -41,7 +41,7 @@ class SearchService
             $numPages = $product->lastPage();
             return [
                 'numPages' => $numPages,
-                'exportProducts' => $product,
+                'Search' => $product,
             ];
     }
 }
