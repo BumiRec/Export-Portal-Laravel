@@ -167,9 +167,6 @@ Route::post('/buyConfirmed', [BuyerController::class, 'buyerConfirmation']);
 //Confiramtion from an owner for selling a product
 Route::post('/sellConfirm', [SellerController::class, 'sellConfirmation']);
 
-//Trede a product confimation
-Route::post('/trade', [TradeController::class, 'store']);
-
 //Add a product at interested list
 Route::post('/interestedAt', [InterestedProductController::class, 'interestedAt']);
 

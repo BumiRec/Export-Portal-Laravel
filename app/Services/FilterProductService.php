@@ -19,7 +19,7 @@ class FilterProductService
         $productCategory = Product::join('product_category', 'product_category.id', 'product.category_id')
             ->join('company', 'company.id', 'product.company_id')
             ->where('product_category.id', $id)
-            ->get(['product.name', 'product.description', 'product.price', 'product.imageURL', 'company.name as company', 'company.country as country']);
+            ->get(['product.name', 'product.description', 'product.price', 'company.name as company', 'company.country as country']);
 
         return $productCategory;
     }
@@ -31,7 +31,7 @@ class FilterProductService
             ->join('company', 'company.id', 'product.company_id')
             ->where('product.category_id', $category_id, )
             ->where('product.subcategory_id', $subcategory_id)
-            ->get(['product.name', 'product.description', 'product.price', 'product.imageURL', 'company.name as company', 'company.country as country']);
+            ->get(['product.name', 'product.description', 'product.price', 'company.name as company', 'company.country as country']);
 
         return response()->json($products);
     }
