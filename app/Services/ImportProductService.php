@@ -12,7 +12,8 @@ class ImportProductService
         $importProducts = ImportProduct::join('product as p', 'import_product.product_id', 'p.id')
             ->join('company as c', 'c.id', 'p.company_id')
             ->join('product_category as pc', 'pc.id', 'p.category_id')
-            ->select(['p.id',
+            ->select([
+                'p.id',
                 'p.name',
                 'p.description',
                 'p.price',
@@ -22,10 +23,15 @@ class ImportProductService
                 'c.country',
                 'c.keywords',
                 'pc.name as category_name',
-                'p.created_at'])
-                ->paginate(10);
+                'p.created_at'
+            ])
+            ->paginate(10);
 
-        return ImportResource::collection($importProducts);
+        $numPages = $importProducts->lastPage();
+        return [
+            'numPages' => $numPages,
+            'exportProducts' => $importProducts,
+        ];
     }
 
     public function importProduct($id)
@@ -34,7 +40,8 @@ class ImportProductService
             ->join('company as c', 'c.id', 'p.company_id')
             ->join('product_category as pc', 'pc.id', 'p.category_id')
             ->where('import_product.product_id', $id)
-            ->get(['p.name',
+            ->get([
+                'p.name',
                 'p.description',
                 'p.price',
                 'p.imageURL',
@@ -43,7 +50,8 @@ class ImportProductService
                 'c.country',
                 'c.keywords',
                 'pc.name as category_name',
-                'import_product.created_at']);
+                'import_product.created_at'
+            ]);
 
         return ImportResource::collection($importProducts);
     }

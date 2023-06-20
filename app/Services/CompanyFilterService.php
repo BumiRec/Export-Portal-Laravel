@@ -8,10 +8,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CompanyFilterService
 {
-    public function companyFilter($id, $languageId)
+    public function companyFilter($id)
     {
-        $changeLanguage = new ChangeLanguageService;
-        $changeLanguage->changeLanguage($languageId);
 
         $companyCategory = CompanyCategory::find($id);
 
