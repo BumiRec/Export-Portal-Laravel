@@ -27,9 +27,6 @@ class ProductImplementation implements ProductInterface
                 'company_id'     => $addProductRequest['company_id'],
             ]
         );
-        error_log($data = $product->toArray());
-
-        Session::put('stored_data', $data);
 
         $typeImportExport = $addProductRequest->type;
 
@@ -41,6 +38,9 @@ class ProductImplementation implements ProductInterface
         if ($typeImportExport == 'import') {
             $this->createImportProduct($productId);
         }
+        ($data = $product->toArray());
+
+        Session::put('stored_data', $data);
         return $product;
     }
     public function createExportProduct($id): ExportProduct
