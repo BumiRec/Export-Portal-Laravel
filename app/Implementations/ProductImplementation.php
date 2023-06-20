@@ -7,7 +7,6 @@ use App\Interfaces\ProductInterface;
 use App\Models\ExportProduct;
 use App\Models\ImportProduct;
 use App\Models\Product;
-use Illuminate\Support\Facades\Session;
 
 class ProductImplementation implements ProductInterface
 {
@@ -38,9 +37,11 @@ class ProductImplementation implements ProductInterface
         if ($typeImportExport == 'import') {
             $this->createImportProduct($productId);
         }
-        ($data = $product->toArray());
 
-        Session::put('stored_data', $data);
+        $data = $product;
+
+        $addProductRequest->session()->put('stored_data', $data);
+
         return $product;
     }
     public function createExportProduct($id): ExportProduct
