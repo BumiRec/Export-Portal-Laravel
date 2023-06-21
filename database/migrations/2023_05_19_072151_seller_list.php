@@ -15,10 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('buyer_id');
-            $table->unsignedBigInteger('company_id');
             $table->foreign('product_id')->references('id')->on('product');
             $table->foreign('buyer_id')->references('id')->on('buyer_confirm');
-            $table->foreign('company_id')->references('id')->on('company');
             $table->timestamps();
         });
     }

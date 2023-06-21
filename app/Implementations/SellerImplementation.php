@@ -9,9 +9,8 @@ class SellerImplementation implements SellerInterface{
 
     public function confirmSell(SellerRequest $sellerRequest)
     {
-        SellerConfirmation::create(
+        $sellerConfirmation = SellerConfirmation::create(
             [
-                'company_id'   => $sellerRequest->company_id,
                 'product_id'   => $sellerRequest->product_id,
                 'buyer_id'     => $sellerRequest->buyer_id,
                 'confirmation' => $sellerRequest->confirmation,
@@ -20,7 +19,11 @@ class SellerImplementation implements SellerInterface{
 
         if ($sellerRequest->confirmation === true) {
 
-            $transaction = new Transaction($sellerRequest->validated());
+            $transaction = Transaction::create([
+                'seller_id'   => $sellerConfirmation->id,
+                'buyer_id'     => $sellerRequest->buyer_id,
+                'product_id'   => $sellerRequest->product_id,
+            ]);
         }
         return $transaction;
     }

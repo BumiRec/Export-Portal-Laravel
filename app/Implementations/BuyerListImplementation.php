@@ -13,8 +13,6 @@ class BuyerListImplementation implements BuyerListInterface
             [
                 'product_id' => $buyerListRequest['product_id'],
                 'user_id'    => $buyerListRequest['user_id'],
-                'company_id' => $buyerListRequest['company_id'],
-
             ]
         );
 

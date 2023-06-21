@@ -16,16 +16,12 @@ class BuyerController extends Controller
     {
         $this->buyerInterface = $buyerInterface;
     }
-    public function buyerConfirmation(BuyerRequest $buyerRequest, BuyerInterface $buyerInterface,
-       SellerListInterface $interestedInterface, SellerListRequest $sellerListRequest) {
+    public function buyerConfirmation(BuyerRequest $buyerRequest, BuyerInterface $buyerInterface) {
 
         $buyer = $this->buyerInterface->createBuyer($buyerRequest);
 
-        $confirm = $buyerRequest->confirmation;
-        if ($confirm === true) {
-
-            $interestedInterface->createInterestedIn($sellerListRequest);
-        }
-        return response()->json(['buyer' => $buyer, $confirm], 201);
+        // $confirm = $buyerRequest->confirmation;
+       
+        return response()->json(['buyer' => $buyer], 201);
     }
 }

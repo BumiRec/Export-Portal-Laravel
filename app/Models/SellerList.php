@@ -10,6 +10,6 @@ class SellerList extends Model
     use HasFactory;
 
     public $table = 'seller_list';
-
-    protected $fillable = ['product_id', 'buyer_id', 'company_id'];
+ 
+    protected $fillable = ['product_id', 'buyer_id'];
 }

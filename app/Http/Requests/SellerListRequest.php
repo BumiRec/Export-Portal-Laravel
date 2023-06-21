@@ -24,7 +24,6 @@ class SellerListRequest extends FormRequest
         return [
             'buyer_id'   => 'required|integer',
             'product_id' => 'required|integer',
-            'company_id' => 'required|integer',
         ];
     }
 }

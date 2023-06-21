@@ -6,7 +6,7 @@ use App\Interfaces\SellerListInterface;
 use App\Services\SellerService;
 use Illuminate\Support\Facades\App;
 
-class SellerListListController extends Controller
+class SellerListController extends Controller
 {
     private SellerService $sellerService;
     private SellerListInterface $sellerListInterface;
@@ -15,9 +15,9 @@ class SellerListListController extends Controller
         $this->sellerListInterface = $sellerListInterface;
     }
 
-    public function interestedIn(SellerService $sellerService, $id)
+    public function interestedIn(SellerService $sellerService)
     {
-        return response()->json($this->sellerService->showInterestedIn($id), 200);
+        return response()->json($this->sellerService->showInterestedIn(), 200);
     }
 
     public function destroy(SellerListInterface $sellerListInterface, $id, $languageId)

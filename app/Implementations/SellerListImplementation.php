@@ -14,7 +14,6 @@ class SellerListImplementation implements SellerListInterface
             [
                 'buyer_id'   => $sellerListRequest['buyer_id'],
                 'product_id' => $sellerListRequest['product_id'],
-                'company_id' => $sellerListRequest['company_id'],
             ]
         );
 

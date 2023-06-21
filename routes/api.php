@@ -16,7 +16,7 @@ use App\Http\Controllers\FileGetDataController;
 use App\Http\Controllers\FileUpdateDeleteController;
 use App\Http\Controllers\FilterProductController;
 use App\Http\Controllers\ImportProduct;
-use App\Http\Controllers\SellerListListController;
+use App\Http\Controllers\SellerListController;
 use App\Http\Controllers\BuyerListController;
 use App\Http\Controllers\ListNotificationsController;
 use App\Http\Controllers\MailFormController;
@@ -31,7 +31,6 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SuccessStoriesController;
 use App\Http\Controllers\TokenController;
-use App\Http\Controllers\TradeController;
 use App\Http\Controllers\UpdateLanguageController;
 use App\Http\Controllers\UpdateProfileUserController;
 use App\Http\Controllers\ViewController;
@@ -100,13 +99,13 @@ Route::get('/filterCompany/{id}', [CompanyFilterController::class, 'filterCompan
 Route::get('/filterProduct/{id}', [FilterProductController::class, 'filterProductCategory']);
 
 //Products people are interested at for user
-Route::get('/interstedProduct/{id}', [BuyerListController::class, 'interestedProduct']);
+Route::get('/buyerList/{id}', [BuyerListController::class, 'interestedProduct']);
 
 //Notification for the buyer that is interested in a product
 Route::get('/Notify/{Oid}/{Pid}/{Uid}/{lang}', [NotifyBuyerInterested::class, 'notify']);
 
 //Products people are interested in for company
-Route::get('/interstedIn/{id}', [SellerListListController::class, 'interestedIn']);
+Route::get('/sellerList', [SellerListController::class, 'interestedIn']);
 
 //Getting data for the "Form" communication
 Route::get('/form/{id}', [MailFormController::class, 'mailForm']);
@@ -168,9 +167,9 @@ Route::post('/buyConfirmed', [BuyerController::class, 'buyerConfirmation']);
 Route::post('/sellConfirm', [SellerController::class, 'sellConfirmation']);
 
 //Add a product at interested list
-Route::post('/interestedAt', [BuyerListController::class, 'interestedAt']);
+Route::post('/buyerList', [BuyerListController::class, 'interestedAt']);
 
-Route::post('/interestedIn', [SellerListListController::class, 'interestedInProduct']);
+Route::post('/sellerList', [SellerListController::class, 'interestedInProduct']);
 
 //Newsletter
 Route::post('/newsletter/{lang}', [NewsletterController::class, 'addNewsletter']);
@@ -199,7 +198,7 @@ Route::delete('/product/{id}/{lang}', [ModifyItem::class, 'destroy']);
 Route::delete('/deleteProduct/{id}/{lang}', [BuyerListController::class, 'deleteInterestedAT']);
 
 //Delete a product from InterestedInList
-Route::delete('/delete/{id}/{langId}', [SellerListListController::class, 'destroy']);
+Route::delete('/delete/{id}/{langId}', [SellerListController::class, 'destroy']);
 
 Route::delete('/deleteFile/{id}/{langId}', [FileUpdateDeleteController::class, 'deleteFile']);
 

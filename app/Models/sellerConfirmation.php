@@ -11,5 +11,5 @@ class SellerConfirmation extends Model
 
     protected $table = 'seller_confirm';
 
-    protected $fillable = ['company_id', 'product_id', 'buyer_id', 'confirmation'];
+    protected $fillable = ['product_id', 'buyer_id', 'confirmation'];
 }
