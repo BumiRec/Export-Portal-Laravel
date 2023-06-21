@@ -16,6 +16,7 @@ use App\Http\Controllers\FileGetDataController;
 use App\Http\Controllers\FileUpdateDeleteController;
 use App\Http\Controllers\FilterProductController;
 use App\Http\Controllers\ImportProduct;
+use App\Http\Controllers\ManageCompaniesController;
 use App\Http\Controllers\SellerListController;
 use App\Http\Controllers\BuyerListController;
 use App\Http\Controllers\ListNotificationsController;
@@ -136,6 +137,8 @@ Route::put('/updateUser/{id}/{lang}', [UpdateProfileUserController::class, 'upda
 
 //Forgot password
 Route::put('/password/{lang}', [PasswordController::class, 'password']);
+
+Route::put('/updateCompany/{id}', [ManageCompaniesController::class, 'manageCompanyData']);
 
 Route::post('/updateFile/{Fid}/{Lid}', [FileUpdateDeleteController::class, 'updateFile']);
 
