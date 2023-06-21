@@ -30,6 +30,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SuccessStoriesController;
+use App\Http\Controllers\SummaryInformationController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\UpdateLanguageController;
 use App\Http\Controllers\UpdateProfileUserController;
@@ -125,6 +126,15 @@ Route::get('/showFiles/{productId}/{fileType}', [FileGetDataController::class, '
 
 Route::get('/notificatiOnOff/{userId}', [NotificationSystemController::class, 'NotificatiOnOff']);
 
+//Update Language
+Route::get('/updateLanguage/{userId}/{languageId}', [UpdateLanguageController::class, 'updateLanguage']);
+
+//show user data in summary information section
+Route::get('/userData', [SummaryInformationController::class, 'userData']);
+
+//show company data in summary information section
+Route::get('/companyData', [SummaryInformationController::class, 'companyData']);
+
 //Update product
 Route::put('/product/{id}', [ModifyItem::class, 'update']);
 
@@ -138,9 +148,6 @@ Route::put('/updateUser/{id}/{lang}', [UpdateProfileUserController::class, 'upda
 Route::put('/password/{lang}', [PasswordController::class, 'password']);
 
 Route::post('/updateFile/{Fid}/{Lid}', [FileUpdateDeleteController::class, 'updateFile']);
-
-//Update Language
-Route::get('/updateLanguage/{userId}/{languageId}', [UpdateLanguageController::class, 'updateLanguage']);
 
 //Register a new user
 Route::post('/register', [RegisterController::class, 'register']);
