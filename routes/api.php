@@ -4,6 +4,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AddProduct;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuyerController;
+use App\Http\Controllers\BuyerListController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyFilterController;
@@ -16,8 +17,6 @@ use App\Http\Controllers\FileGetDataController;
 use App\Http\Controllers\FileUpdateDeleteController;
 use App\Http\Controllers\FilterProductController;
 use App\Http\Controllers\ImportProduct;
-use App\Http\Controllers\SellerListController;
-use App\Http\Controllers\BuyerListController;
 use App\Http\Controllers\ListNotificationsController;
 use App\Http\Controllers\MailFormController;
 use App\Http\Controllers\ModifyItem;
@@ -29,6 +28,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\SellerListController;
 use App\Http\Controllers\SuccessStoriesController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\UpdateLanguageController;
@@ -102,7 +102,7 @@ Route::get('/filterProduct/{id}', [FilterProductController::class, 'filterProduc
 Route::get('/buyerList/{id}', [BuyerListController::class, 'interestedProduct']);
 
 //Notification for the buyer that is interested in a product
-Route::get('/Notify/{Oid}/{Pid}/{Uid}/{lang}', [NotifyBuyerInterested::class, 'notify']);
+Route::get('/addNotify/{Oid}/{Pid}/{Uid}/{lang}', [NotifyBuyerInterested::class, 'notify']);
 
 //Products people are interested in for company
 Route::get('/sellerList', [SellerListController::class, 'interestedIn']);
@@ -111,7 +111,11 @@ Route::get('/sellerList', [SellerListController::class, 'interestedIn']);
 Route::get('/form/{id}', [MailFormController::class, 'mailForm']);
 
 //Get the the Notifications for the Owner
-Route::get('/Notify/{id}/{lang}', [ListNotificationsController::class, 'findNotifications']);
+Route::get('/showAllNotify/{id}/{lang}', [ListNotificationsController::class, 'showAllNotifications']);
+
+Route::get('/showUnReadNotify/{id}/{lang}', [ListNotificationsController::class, 'showUnReadNotifications']);
+
+Route::get('/MarkAsReadNotify/{id}/{lang}', [ListNotificationsController::class, 'markAsReadNotify']);
 
 //
 Route::get('/corporate/{id}', [CorporateController::class, 'showCorporate']);
