@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string("type");
             $table->unsignedBigInteger("category_id");
             $table->unsignedBigInteger("subcategory_id");
+            $table->unsignedBigInteger('status_id')->default(1);
             $table->string("taxpayer_office");
             $table->string('profile_picture')->nullable();
             $table->string('membership')->nullable();
@@ -30,6 +31,7 @@ return new class extends Migration
             // $table->unsignedBigInteger('activity_company_id');
             $table->foreign('category_id')->references('id')->on('company_categories');
             $table->foreign('subcategory_id')->references('id')->on('company_subcategories');
+            $table->foreign('status_id')->references('id')->on('company_status');
             // $table->foreign('activity_company_id')->references('id')->on('activity_company');
             $table->timestamps();
         });

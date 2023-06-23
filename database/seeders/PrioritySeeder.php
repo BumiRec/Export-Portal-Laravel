@@ -21,6 +21,7 @@ class PrioritySeeder extends Seeder
             CountrySeeder::class,
             FileTypeSeeder::class,
             LanguageSeeder::class,
+            CompanyStatusSeeder::class,
             DatabaseSeeder::class,
             RolesSeeder::class,
 
