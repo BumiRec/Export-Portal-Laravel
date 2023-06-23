@@ -4,7 +4,6 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AddProduct;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuyerController;
-use App\Http\Controllers\BuyerListController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyFilterController;
@@ -17,6 +16,9 @@ use App\Http\Controllers\FileGetDataController;
 use App\Http\Controllers\FileUpdateDeleteController;
 use App\Http\Controllers\FilterProductController;
 use App\Http\Controllers\ImportProduct;
+use App\Http\Controllers\ManageCompaniesController;
+use App\Http\Controllers\SellerListController;
+use App\Http\Controllers\BuyerListController;
 use App\Http\Controllers\ListNotificationsController;
 use App\Http\Controllers\MailFormController;
 use App\Http\Controllers\ModifyItem;
@@ -28,7 +30,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SellerController;
-use App\Http\Controllers\SellerListController;
 use App\Http\Controllers\SuccessStoriesController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\UpdateLanguageController;
@@ -141,6 +142,8 @@ Route::put('/updateUser/{id}/{lang}', [UpdateProfileUserController::class, 'upda
 //Forgot password
 Route::put('/password/{lang}', [PasswordController::class, 'password']);
 
+Route::put('/updateCompany/{id}', [ManageCompaniesController::class, 'manageCompanyData']);
+
 Route::post('/updateFile/{Fid}/{Lid}', [FileUpdateDeleteController::class, 'updateFile']);
 
 //Update Language
@@ -205,6 +208,10 @@ Route::delete('/deleteProduct/{id}/{lang}', [BuyerListController::class, 'delete
 Route::delete('/delete/{id}/{langId}', [SellerListController::class, 'destroy']);
 
 Route::delete('/deleteFile/{id}/{langId}', [FileUpdateDeleteController::class, 'deleteFile']);
+
+Route::delete('/deleteCompany/{companyId}', [ManageCompaniesController::class, 'companyDeleted']);
+
+Route::delete('/deleteProduct/{productId}', [ManageCompaniesController::class, 'productDeleted']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

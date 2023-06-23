@@ -10,6 +10,7 @@ use App\Implementations\FileGetDataImplementation;
 use App\Implementations\FileUpdateDeleteImplementation;
 use App\Implementations\ForgotPasswordImplementation;
 use App\Implementations\BuyerListImplementation;
+use App\Implementations\ManageCompaniesImplementation;
 use App\Implementations\SellerListImplementation;
 use App\Implementations\ModifyItemImplementation;
 use App\Implementations\ProductImplementation;
@@ -25,6 +26,7 @@ use App\Interfaces\ExportInterface;
 use App\Interfaces\FileGetDataInterface;
 use App\Interfaces\FileUpdateDeleteInterface;
 use App\Interfaces\BuyerListInterface;
+use App\Interfaces\ManageCompaniesInterface;
 use App\Interfaces\SellerListInterface;
 use App\Interfaces\ModifyItemInterface;
 use App\Interfaces\PasswordInterface;
@@ -59,6 +61,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(FileGetDataInterface::class, FileGetDataImplementation::class);
         $this->app->bind(PasswordInterface::class, ForgotPasswordImplementation::class);
         $this->app->bind(SuccessStoriesInterface::class, SuccessStoriesImplementation::class);
+        $this->app->bind(ManageCompaniesInterface::class, ManageCompaniesImplementation::class);
     }
 
     /**
