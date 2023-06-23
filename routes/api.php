@@ -205,6 +205,10 @@ Route::delete('/delete/{id}/{langId}', [SellerListController::class, 'destroy'])
 
 Route::delete('/deleteFile/{id}/{langId}', [FileUpdateDeleteController::class, 'deleteFile']);
 
+Route::delete('/deleteCompany/{companyId}', [ManageCompaniesController::class, 'companyDeleted']);
+
+Route::delete('/deleteProduct/{productId}', [ManageCompaniesController::class, 'productDeleted']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

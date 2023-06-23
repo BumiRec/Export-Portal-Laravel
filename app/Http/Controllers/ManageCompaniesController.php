@@ -18,4 +18,12 @@ class ManageCompaniesController extends Controller
     {
         return response()->json($this->manageCompaniesInterface->updateCompany($manageCompaniesRequest, $companyId));
     }
+
+    public function companyDeleted($companyId){
+        return response()->json($this->manageCompaniesInterface->deleteCompany($companyId));
+    }
+
+    public function productDeleted($productId){
+        return response()->json($this->manageCompaniesInterface->deleteProduct($productId));
+    }
 }
