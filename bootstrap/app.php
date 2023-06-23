@@ -25,11 +25,6 @@ $app = new Illuminate\Foundation\Application(
 | incoming requests to this application from both the web and CLI.
 |
  */
-$app->routeMiddleware([
-    'auth'       => App\Http\Middleware\Authenticate::class,
-    'permission' => Spatie\Permission\Middlewares\PermissionMiddleware::class,
-    'role'       => Spatie\Permission\Middlewares\RoleMiddleware::class,
-]);
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
