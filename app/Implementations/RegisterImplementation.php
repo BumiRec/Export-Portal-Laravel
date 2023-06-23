@@ -39,8 +39,8 @@ class RegisterImplementation implements RegisterInterface
                 'language_id' => 1,
             ]);
             UserNotification::create([
-                'user_id'     => $user->id,
-                'system' => 1,
+                'user_id' => $user->id,
+                'system'  => 1,
             ]);
         }
 

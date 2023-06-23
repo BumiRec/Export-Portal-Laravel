@@ -20,14 +20,14 @@ class NotificationSystemService
                 ->where('users.id', $userId)
                 ->update(['user_notification.system' => 0]);
 
-                return 'Notifications off';
+            return 'Notifications off';
         }
         if ($systemValue == 0) {
             UserNotification::join('users', 'users.id', 'user_notification.user_id')
                 ->where('users.id', $userId)
                 ->update(['user_notification.system' => 1]);
-                
-                return 'Notifications on';
+
+            return 'Notifications on';
         }
     }
 }
