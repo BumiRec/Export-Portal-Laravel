@@ -12,13 +12,18 @@ class SummaryInformationController extends Controller
         $this->summaryInformationService = $summaryInformationService;
     }
 
-    public function userData(){
+    public function userData($companyId){
 
-        return response()->json($this->summaryInformationService->showUserData(), 200);
+        return response()->json($this->summaryInformationService->showUserData($companyId), 200);
     }
 
-    public function companyData(){
+    public function companyData($userId){
 
-        return response()->json($this->summaryInformationService->showCompanyData(), 200);
+        return response()->json($this->summaryInformationService->showCompanyData($userId), 200);
+    }
+
+    public function userCompany($userId){
+
+        return response()->json($this->summaryInformationService->companyUser($userId), 200);
     }
 }

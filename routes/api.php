@@ -130,10 +130,13 @@ Route::get('/notificatiOnOff/{userId}', [NotificationSystemController::class, 'N
 Route::get('/updateLanguage/{userId}/{languageId}', [UpdateLanguageController::class, 'updateLanguage']);
 
 //show user data in summary information section
-Route::get('/userData', [SummaryInformationController::class, 'userData']);
+Route::get('/userData/{company_id}', [SummaryInformationController::class, 'userData']);
 
 //show company data in summary information section
-Route::get('/companyData', [SummaryInformationController::class, 'companyData']);
+Route::get('/companyData/{userId}', [SummaryInformationController::class, 'companyData']);
+
+
+Route::get('/userCompany/{userId}', [SummaryInformationController::class, 'userCompany']);
 
 //Update product
 Route::put('/product/{id}', [ModifyItem::class, 'update']);
