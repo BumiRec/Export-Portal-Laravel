@@ -18,7 +18,6 @@ class ProductImplementation implements ProductInterface
                 'name'           => $addProductRequest['name'],
                 'description'    => $addProductRequest['description'],
                 'price'          => $addProductRequest['price'],
-                'imageURL'       => $addProductRequest['imageURL'],
                 'type'           => $addProductRequest['type'],
                 'views'          => $addProductRequest['views'],
                 'category_id'    => $addProductRequest['category_id'],
