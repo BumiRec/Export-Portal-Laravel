@@ -19,10 +19,15 @@ class AnnouncementsImplementation implements AnnouncementsInterface
 
     public function updateAnnouncements($id): Announcements
     {
-        $announcements         = Announcements::findOrFail($id);
+        $announcements         = Announcements::find($id);
         $announcements->status = 0;
         $announcements->save();
         return $announcements;
+    }
+
+    public function showAnnouncements()
+    {
+        return Announcements::get(['title', 'text', 'status']);
     }
 
 }
