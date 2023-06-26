@@ -5,6 +5,7 @@ use App\Http\Controllers\AddProduct;
 use App\Http\Controllers\AnnouncementsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuyerController;
+use App\Http\Controllers\BuyerListController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryStatusController;
 use App\Http\Controllers\CompanyController;
@@ -18,11 +19,9 @@ use App\Http\Controllers\FileGetDataController;
 use App\Http\Controllers\FileUpdateDeleteController;
 use App\Http\Controllers\FilterProductController;
 use App\Http\Controllers\ImportProduct;
-use App\Http\Controllers\ManageCompaniesController;
-use App\Http\Controllers\SellerListController;
-use App\Http\Controllers\BuyerListController;
 use App\Http\Controllers\ListNotificationsController;
 use App\Http\Controllers\MailFormController;
+use App\Http\Controllers\ManageCompaniesController;
 use App\Http\Controllers\ModifyItem;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\NotificationSystemController;
@@ -32,8 +31,10 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\SellerListController;
 use App\Http\Controllers\SuccessStoriesController;
 use App\Http\Controllers\SummaryInformationController;
+use App\Http\Controllers\test;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\UpdateLanguageController;
 use App\Http\Controllers\UpdateProfileUserController;
@@ -142,7 +143,6 @@ Route::get('/userData/{company_id}', [SummaryInformationController::class, 'user
 //show company data in summary information section
 Route::get('/companyData/{userId}', [SummaryInformationController::class, 'companyData']);
 
-
 Route::get('/userCompany/{userId}', [SummaryInformationController::class, 'userCompany']);
 //view Announcements
 Route::get('/viewAnnouncements', [AnnouncementsController::class, 'viewAnnouncements']);
@@ -244,3 +244,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/test', [test::class, 'test']);
