@@ -22,7 +22,6 @@ class SellerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'company_id'   => 'required|integer',
             'product_id'   => 'required|integer',
             'buyer_id'     => 'required|integer',
             'confirmation' => 'required|boolean:true,false',

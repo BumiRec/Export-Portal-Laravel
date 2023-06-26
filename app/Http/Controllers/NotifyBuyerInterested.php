@@ -14,6 +14,6 @@ class NotifyBuyerInterested extends Controller
     }
     public function notify($Oid, $Uid, $Pid, $languageId)
     {
-        return $this->notifyBuyerService->notifyBuyer($Oid, $Uid, $Pid, $languageId);
+         return $this->notifyBuyerService->notifyBuyer($Oid, $Uid, $Pid, $languageId);
     }
 }

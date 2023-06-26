@@ -7,8 +7,6 @@ use App\Interfaces\ProductInterface;
 use App\Models\ExportProduct;
 use App\Models\ImportProduct;
 use App\Models\Product;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class ProductImplementation implements ProductInterface
 {
@@ -27,7 +25,6 @@ class ProductImplementation implements ProductInterface
                 'name'           => $addProductRequest['name'],
                 'description'    => $addProductRequest['description'],
                 'price'          => $addProductRequest['price'],
-                'imageURL'       => $addProductRequest['imageURL'],
                 'type'           => $addProductRequest['type'],
                 'views'          => $addProductRequest['views'],
                 'category_id'    => $addProductRequest['category_id'],
@@ -35,9 +32,6 @@ class ProductImplementation implements ProductInterface
                 'company_id'     => $addProductRequest['company_id'],
             ]
         );
-        error_log($data = $product->toArray());
-
-        Session::put('stored_data', $data);
 
         $typeImportExport = $addProductRequest->type;
 
@@ -49,6 +43,11 @@ class ProductImplementation implements ProductInterface
         if ($typeImportExport == 'import') {
             $this->createImportProduct($productId);
         }
+
+        $data = $product;
+
+        $addProductRequest->session()->put('stored_data', $data);
+
         return $product;
     }
     public function createExportProduct($id): ExportProduct

@@ -24,7 +24,7 @@ class User extends Authenticatable
      */
 
     public $table = 'users';
-    
+
     protected $fillable = [
         'name',
         'surname',
@@ -55,4 +55,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function language()
+    {
+        return $this->belongsTo(UserLanguage::class);
+    }
+
 }
