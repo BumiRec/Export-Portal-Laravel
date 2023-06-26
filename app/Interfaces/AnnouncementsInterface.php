@@ -7,4 +7,6 @@ use App\Models\Announcements;
 interface AnnouncementsInterface{
 
     public function createAnnouncements(AnnouncementsRequest $announcementsRequest): Announcements;
+
+    public function updateAnnouncements($id):Announcements;
 }

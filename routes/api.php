@@ -159,6 +159,9 @@ Route::put('/password/{lang}', [PasswordController::class, 'password']);
 
 Route::put('/updateCompany/{id}', [ManageCompaniesController::class, 'manageCompanyData']);
 
+//Update announcements status
+Route::put('/announcementsUpdate/{id}', [AnnouncementsController::class, 'announcementsUpdate']);
+
 //Owner can update the categories
 Route::put('/updateCategory/{companyId}', [CategoryStatusController::class, 'categoryUpdated']);
 
