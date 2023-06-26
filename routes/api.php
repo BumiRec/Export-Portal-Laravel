@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AddProduct;
+use App\Http\Controllers\AnnouncementsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\CategoryController;
@@ -214,6 +215,9 @@ Route::post('/email/{lang}', [EmailController::class, 'email']);
 
 //Add a success sotory
 Route::post('/successStory', [SuccessStoriesController::class, 'addSucessStories']);
+
+//Add announcements
+Route::post('/announcements', [AnnouncementsController::class, 'announcements']);
 
 //Detele a product
 Route::delete('/product/{id}/{lang}', [ModifyItem::class, 'destroy']);
