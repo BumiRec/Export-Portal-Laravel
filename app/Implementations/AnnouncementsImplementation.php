@@ -27,7 +27,7 @@ class AnnouncementsImplementation implements AnnouncementsInterface
 
     public function showAnnouncements()
     {
-        return Announcements::get(['title', 'text', 'status']);
+        return Announcements::get(['title', 'text', 'status', 'created_at']);
     }
 
 }
