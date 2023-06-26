@@ -23,7 +23,7 @@ class PrioritySeeder extends Seeder
             LanguageSeeder::class,
             CompanyStatusSeeder::class,
             DatabaseSeeder::class,
-            RolesSeeder::class,
+            //RolesSeeder::class,
 
         ]);
     }

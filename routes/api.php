@@ -5,6 +5,7 @@ use App\Http\Controllers\AddProduct;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoryStatusController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyFilterController;
 use App\Http\Controllers\CompanyListController;
@@ -156,6 +157,12 @@ Route::put('/updateUser/{id}/{lang}', [UpdateProfileUserController::class, 'upda
 Route::put('/password/{lang}', [PasswordController::class, 'password']);
 
 Route::put('/updateCompany/{id}', [ManageCompaniesController::class, 'manageCompanyData']);
+
+//Owner can update the categories
+Route::put('/updateCategory/{companyId}', [CategoryStatusController::class, 'categoryUpdated']);
+
+//Admin update the status of a company
+Route::put('updateStatus/{companyId}', [CategoryStatusController::class, 'statusUpdated']);
 
 Route::post('/updateFile/{Fid}/{Lid}', [FileUpdateDeleteController::class, 'updateFile']);
 

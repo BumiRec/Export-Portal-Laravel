@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Implementations\BuyerImplementation;
 use App\Implementations\CategoryImplementation;
+use App\Implementations\CategoryStatusImplementation;
 use App\Implementations\CompanyImplementation;
 use App\Implementations\ExportImplementation;
 use App\Implementations\FileGetDataImplementation;
@@ -21,6 +22,7 @@ use App\Implementations\TokenImplementation;
 use App\Implementations\UpdateProfileUserImplementation;
 use App\Interfaces\BuyerInterface;
 use App\Interfaces\CategoryInterface;
+use App\Interfaces\CategoryStatusInterface;
 use App\Interfaces\CompanyInterface;
 use App\Interfaces\ExportInterface;
 use App\Interfaces\FileGetDataInterface;
@@ -62,6 +64,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PasswordInterface::class, ForgotPasswordImplementation::class);
         $this->app->bind(SuccessStoriesInterface::class, SuccessStoriesImplementation::class);
         $this->app->bind(ManageCompaniesInterface::class, ManageCompaniesImplementation::class);
+        $this->app->bind(CategoryStatusInterface::class, CategoryStatusImplementation::class);
     }
 
     /**
