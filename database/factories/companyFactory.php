@@ -9,6 +9,7 @@ use App\Models\Company;
  */
 
 use App\Models\CompanyCategory;
+use App\Models\CompanyStatus;
 use App\Models\CompanySubcategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -41,6 +42,7 @@ class companyFactory extends Factory
             'taxpayer_office' => $this->faker->numberBetween(100, 999),
             'category_id'     => CompanyCategory::inRandomOrder()->first()->id,
             'subcategory_id'  => CompanySubcategory::inRandomOrder()->first()->id,
+            'status_id'       => CompanyStatus::inRandomOrder()->first()->id,
             'TIN'             => $this->faker->numberBetween(10, 99),
             'profile_picture' => $this->faker->imageUrl(640, 480, 'company', true, 'Faker'),
             'membership'      => $this->faker->words(3, true),

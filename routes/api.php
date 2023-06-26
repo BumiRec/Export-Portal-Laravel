@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AddProduct;
+use App\Http\Controllers\AnnouncementsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\BuyerListController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoryStatusController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyFilterController;
 use App\Http\Controllers\CompanyListController;
@@ -31,6 +33,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SellerListController;
 use App\Http\Controllers\SuccessStoriesController;
+use App\Http\Controllers\SummaryInformationController;
 use App\Http\Controllers\test;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\UpdateLanguageController;
@@ -131,6 +134,17 @@ Route::get('/showFiles/{productId}/{fileType}', [FileGetDataController::class, '
 
 Route::get('/notificatiOnOff/{userId}', [NotificationSystemController::class, 'NotificatiOnOff']);
 
+//Update Language
+Route::get('/updateLanguage/{userId}/{languageId}', [UpdateLanguageController::class, 'updateLanguage']);
+
+//show user data in summary information section
+Route::get('/userData/{company_id}', [SummaryInformationController::class, 'userData']);
+
+//show company data in summary information section
+Route::get('/companyData/{userId}', [SummaryInformationController::class, 'companyData']);
+
+Route::get('/userCompany/{userId}', [SummaryInformationController::class, 'userCompany']);
+
 //Update product
 Route::put('/product/{id}', [ModifyItem::class, 'update']);
 
@@ -145,10 +159,16 @@ Route::put('/password/{lang}', [PasswordController::class, 'password']);
 
 Route::put('/updateCompany/{id}', [ManageCompaniesController::class, 'manageCompanyData']);
 
-Route::post('/updateFile/{Fid}/{Lid}', [FileUpdateDeleteController::class, 'updateFile']);
+//Update announcements status
+Route::put('/announcementsUpdate/{id}', [AnnouncementsController::class, 'announcementsUpdate']);
 
-//Update Language
-Route::get('/updateLanguage/{userId}/{languageId}', [UpdateLanguageController::class, 'updateLanguage']);
+//Owner can update the categories
+Route::put('/updateCategory/{companyId}', [CategoryStatusController::class, 'categoryUpdated']);
+
+//Admin update the status of a company
+Route::put('updateStatus/{companyId}', [CategoryStatusController::class, 'statusUpdated']);
+
+Route::post('/updateFile/{Fid}/{Lid}', [FileUpdateDeleteController::class, 'updateFile']);
 
 //Register a new user
 Route::post('/register', [RegisterController::class, 'register']);
@@ -198,6 +218,9 @@ Route::post('/email/{lang}', [EmailController::class, 'email']);
 
 //Add a success sotory
 Route::post('/successStory', [SuccessStoriesController::class, 'addSucessStories']);
+
+//Add announcements
+Route::post('/announcements', [AnnouncementsController::class, 'announcements']);
 
 //Detele a product
 Route::delete('/product/{id}/{lang}', [ModifyItem::class, 'destroy']);
