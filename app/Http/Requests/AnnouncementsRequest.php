@@ -24,7 +24,6 @@ class AnnouncementsRequest extends FormRequest
         return [
             'title'  => 'required|string',
             'text'   => 'required|string',
-            'status' => 'required|boolean',
         ];
     }
 }

@@ -158,6 +158,9 @@ Route::put('/password/{lang}', [PasswordController::class, 'password']);
 
 Route::put('/updateCompany/{id}', [ManageCompaniesController::class, 'manageCompanyData']);
 
+//Update announcements status
+Route::put('/announcementsUpdate/{id}', [AnnouncementsController::class, 'announcementsUpdate']);
+
 Route::post('/updateFile/{Fid}/{Lid}', [FileUpdateDeleteController::class, 'updateFile']);
 
 //Register a new user
