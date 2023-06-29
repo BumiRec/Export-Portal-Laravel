@@ -172,6 +172,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Illuminate\Session\SessionServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
     ])->toArray(),
 
