@@ -20,15 +20,18 @@ class SummaryInformationService
         return UserCompany::join('company as c', 'c.id', 'user_company.company_id')
             ->join('users as u', 'u.id', 'user_company.user_id')
             ->join('company_status as cs', 'cs.id', 'c.status_id')
+            ->join('company_categories as cc', 'cc.id', 'c.category_id')
+            ->join('company_subcategories as csb', 'csb.id', 'c.subcategory_id')
             ->where('user_id', $userId)
-            ->get(['c.name', 'c.keywords', 'c.country', 'c.web_address', 'c.more_info',
-                'c.budged', 'c.type', 'c.category_id', 'c.subcategory_id', 'c.membership', 'cs.status']);
+            ->get(['c.id', 'c.name', 'c.keywords', 'c.country', 'c.web_address', 'c.more_info',
+                'c.budged', 'c.type', 'cc.name', 'csb.name', 'c.membership', 'cs.status']);
     }
 
-    public function companyUser($userId){
+    public function companyUser($userId)
+    {
 
         return UserCompany::join('company as c', 'c.id', 'user_company.company_id')
-        ->where('user_id', $userId)
-        ->get(['c.id', 'c.name']);
+            ->where('user_id', $userId)
+            ->get(['c.id', 'c.name']);
     }
 }
