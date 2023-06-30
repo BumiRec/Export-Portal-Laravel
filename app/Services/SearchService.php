@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Http\Requests\SearchRequest;
 use App\Models\Company;
 use App\Models\Product;
+use App\Models\User;
 
 class SearchService
 {
@@ -43,5 +44,11 @@ class SearchService
                 'numPages' => $numPages,
                 'Search' => $product,
             ];
+    }
+
+    public function searchUser(SearchRequest $search){
+        return User::where('name', 'like', '%'.$search->search.'%')
+        ->orWhere('surname', 'like', '%'.$search->search.'%')
+        ->orWhere('email', 'like', '%'.$search->search.'%');
     }
 }
