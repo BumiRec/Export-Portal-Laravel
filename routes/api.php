@@ -28,7 +28,6 @@ use App\Http\Controllers\NotifyBuyerInterested;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SellerListController;
 use App\Http\Controllers\SuccessStoriesController;
@@ -145,13 +144,13 @@ Route::get('/companyData/{userId}', [SummaryInformationController::class, 'compa
 Route::get('/userCompany/{userId}', [SummaryInformationController::class, 'userCompany']);
 
 //Update product
-    Route::put('/product/{id}', [ModifyItem::class, 'update']);
+Route::put('/product/{id}', [ModifyItem::class, 'update']);
 
 //Updating Token
-    Route::put('/updateToken/{id}/{lang}', [TokenController::class, 'updateToken']);
+Route::put('/updateToken/{id}/{lang}', [TokenController::class, 'updateToken']);
 
 //Updating User Profile Data
-    Route::put('/updateUser/{id}/{lang}', [UpdateProfileUserController::class, 'update']);
+Route::put('/updateUser/{id}/{lang}', [UpdateProfileUserController::class, 'update']);
 
 //Forgot password
 Route::put('/password/{lang}', [PasswordController::class, 'password']);
@@ -176,22 +175,22 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 //Logout
-    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
 //Create a new company
-    Route::post('/company/{userId}', [CompanyController::class, 'company']);
+Route::post('/company/{userId}', [CompanyController::class, 'company']);
 
 //Activity area for comapany
-    Route::post('/activity/{lang}', [ActivityController::class, 'activitycontroller']);
+Route::post('/activity/{lang}', [ActivityController::class, 'activitycontroller']);
 
 //Add a new product
-    Route::post('/add', [AddProduct::class, 'AddProduct']);
+Route::post('/add', [AddProduct::class, 'AddProduct']);
 
 //Confiramtion from an user for buying a product
-    Route::post('/buyConfirmed', [BuyerController::class, 'buyerConfirmation']);
+Route::post('/buyConfirmed', [BuyerController::class, 'buyerConfirmation']);
 
 //Confiramtion from an owner for selling a product
-    Route::post('/sellConfirm', [SellerController::class, 'sellConfirmation']);
+Route::post('/sellConfirm', [SellerController::class, 'sellConfirmation']);
 
 //Add a product at interested list
 Route::post('/buyerList', [BuyerListController::class, 'interestedAt']);
@@ -199,24 +198,24 @@ Route::post('/buyerList', [BuyerListController::class, 'interestedAt']);
 Route::post('/sellerList', [SellerListController::class, 'interestedInProduct']);
 
 //Newsletter
-    Route::post('/newsletter/{lang}', [NewsletterController::class, 'addNewsletter']);
+Route::post('/newsletter/{lang}', [NewsletterController::class, 'addNewsletter']);
 
 //Admin can send newsletter
-    Route::post('/sendnewsletter/{lang}', [NewsletterController::class, 'sendNewsletter']);
+Route::post('/sendnewsletter/{lang}', [NewsletterController::class, 'sendNewsletter']);
 
-    Route::post('/addFile', [FileController::class, 'addFile']);
+Route::post('/addFile', [FileController::class, 'addFile']);
 
 //Send support email
-    Route::post('/email/{lang}', [EmailController::class, 'email']);
+Route::post('/email/{lang}', [EmailController::class, 'email']);
 
 //Add a success sotory
-    Route::post('/successStory', [SuccessStoriesController::class, 'addSucessStories']);
+Route::post('/successStory', [SuccessStoriesController::class, 'addSucessStories']);
 
 //Add announcements
 Route::post('/announcements', [AnnouncementsController::class, 'announcements']);
 
 //Detele a product
-    Route::delete('/product/{id}/{lang}', [ModifyItem::class, 'destroy']);
+Route::delete('/product/{id}/{lang}', [ModifyItem::class, 'destroy']);
 
 //Delete a product from InterestedAt
 Route::delete('/deleteProduct/{id}/{lang}', [BuyerListController::class, 'deleteInterestedAT']);
@@ -224,9 +223,7 @@ Route::delete('/deleteProduct/{id}/{lang}', [BuyerListController::class, 'delete
 //Delete a product from InterestedInList
 Route::delete('/delete/{id}/{langId}', [SellerListController::class, 'destroy']);
 
-    Route::delete('/deleteFile/{id}/{lang}', [FileUpdateDeleteController::class, 'deleteFile']);
-
-});
+Route::delete('/deleteFile/{id}/{lang}', [FileUpdateDeleteController::class, 'deleteFile']);
 
 Route::delete('/deleteCompany/{companyId}', [ManageCompaniesController::class, 'companyDeleted']);
 
