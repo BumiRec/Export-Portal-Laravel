@@ -17,14 +17,14 @@ class SummaryInformationService
 
     public function showCompanyData($userId)
     {
-        return UserCompany::join('company as c', 'c.id', 'user_company.company_id')
-            ->join('users as u', 'u.id', 'user_company.user_id')
-            ->join('company_status as cs', 'cs.id', 'c.status_id')
-            ->join('company_categories as cc', 'cc.id', 'c.category_id')
-            ->join('company_subcategories as csb', 'csb.id', 'c.subcategory_id')
+        return UserCompany::join('company', 'company.id', 'user_company.company_id')
+            ->join('users', 'users.id', 'user_company.user_id')
+            ->join('company_status', 'company_status.id', 'company.status_id')
+            ->join('company_categories', 'company_categories.id', 'company.category_id')
+            ->join('company_subcategories', 'company_subcategories.id', 'company.subcategory_id')
             ->where('user_id', $userId)
-            ->get(['c.id', 'c.name', 'c.keywords', 'c.country', 'c.web_address', 'c.more_info',
-                'c.budged', 'c.type', 'cc.name', 'csb.name', 'c.membership', 'cs.status']);
+            ->get(['company.id', 'company.name as company name', 'company.keywords', 'company.country', 'company.web_address', 'company.more_info',
+                'company.budged', 'company.type', 'company_categories.name as category name', 'company_subcategories.name as subcategory name', 'company.membership', 'company_status.status']);
     }
 
     public function companyUser($userId)
