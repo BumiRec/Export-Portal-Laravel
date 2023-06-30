@@ -14,7 +14,7 @@ class FileService
         $storedData = $request->session()->get('stored_data');
 
         if (!$storedData) {
-            return response()->json(['error' => __('messages.noStoredData')], 400);
+            return response()->json(['error' => __('messages.noStoredProduct')], 400);
         }
 
         $productId = $this->processData($storedData)['id'];
@@ -25,13 +25,13 @@ class FileService
             $typeId        = $request->input('typeId')[$key];
             $filePath      = '';
             $fileExtension = $file->getClientOriginalExtension();
-            $imgMimes      = ['jpg', 'png', 'jpeg'];
+            $filesMimes    = ['jpg', 'png', 'jpeg', 'pdf'];
 
-            if ($typeId == 1 && in_array($fileExtension, $imgMimes)) {
+            if ($typeId == 1 && in_array($fileExtension, $filesMimes)) {
                 $filePath = $file->store('Images/cover', 'public');
-            } elseif ($typeId == 2 && in_array($fileExtension, $imgMimes)) {
+            } elseif ($typeId == 2 && in_array($fileExtension, $filesMimes)) {
                 $filePath = $file->store('Images/slide', 'public');
-            } elseif ($typeId == 3 && $fileExtension === 'pdf') {
+            } elseif ($typeId == 3 && in_array($fileExtension, $filesMimes)) {
                 $filePath = $file->store('Documents/pdf', 'public');
             } else {
                 return response()->json(['error' => __('messages.errorFile')], 400);
