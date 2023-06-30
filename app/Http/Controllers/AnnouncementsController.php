@@ -22,4 +22,9 @@ class AnnouncementsController extends Controller
     {
         return response()->json($this->announcementsInterface->updateAnnouncements($id));
     }
+
+    public function viewAnnouncements()
+    {
+        return response()->json($this->announcementsInterface->showAnnouncements());
+    }
 }

@@ -15,8 +15,7 @@ class CompanyStatusSeeder extends Seeder
     {
         $status = [
             ['status' => 'Preparing'],
-            ['status' => 'Under'],
-            ['status' => 'Reviewal'],
+            ['status' => 'Under Reviewal'],
             ['status' => 'Approved'],
             ['status' => 'Disapproved']
         ];

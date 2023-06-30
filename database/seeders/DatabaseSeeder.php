@@ -9,6 +9,7 @@ use App\Models\ExportProduct;
 use App\Models\ImportProduct;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\UserCompany;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -48,5 +49,7 @@ class DatabaseSeeder extends Seeder
         // usersToken::factory(20)->create();
 
         // \App\Models\User::factory(10)->create();
+        UserCompany::factory(10)->create();
+
     }
 }
