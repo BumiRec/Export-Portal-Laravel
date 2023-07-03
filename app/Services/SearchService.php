@@ -47,8 +47,16 @@ class SearchService
     }
 
     public function searchUser(SearchRequest $search){
-        return User::where('name', 'like', '%'.$search->search.'%')
+        $users =  User::where('name', 'like', '%'.$search->search.'%')
         ->orWhere('surname', 'like', '%'.$search->search.'%')
-        ->orWhere('email', 'like', '%'.$search->search.'%');
+        ->orWhere('email', 'like', '%'.$search->search.'%')
+        ->select(['name', 'surname', 'email', 'phone_number', 'gender'])
+        ->paginate(10);
+
+        $numPages = $users->lastPage();
+        return [
+            'numPages' => $numPages,
+            'Search' => $users,
+        ];
     }
 }

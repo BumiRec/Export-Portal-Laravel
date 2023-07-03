@@ -214,6 +214,9 @@ Route::post('/searchCompany', [SearchController::class, 'companySearch']);
 //Search for product
 Route::post('/searchProduct', [SearchController::class, 'productSearch']);
 
+//Search for users
+Route::post('/searchUsers', [SearchController::class, 'userSearch']);
+
 //Send support email
 Route::post('/email/{lang}', [EmailController::class, 'email']);
 
