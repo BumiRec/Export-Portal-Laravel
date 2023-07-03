@@ -2,8 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\ExportProduct;
+use App\Models\FileUpload;
+use App\Models\ImportProduct;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
@@ -22,24 +27,4 @@ class Product extends Model
         'company_id',
         'created_at',
     ];
-
-    public function category(){
-        return $this-> belongsTo(ProductCategory::class, 'category_id');
-    }
-
-    public function subcategory(){
-        return $this-> belongsTo(ProductCategory::class, 'subcategory_id');
-    }
-
-    public function company(){
-        return $this-> belongsTo(Company::class, 'company_id');
-    }
-
-    public function buyer(){
-        return $this -> belongsToMany(User::class, 'buyer_list', 'product_id', 'user_id');
-    }
-
-    public function sellerConfirmation(){
-        return $this-> hasOne(SellerConfirmation::class, 'product_id');
-    }
 }

@@ -3,8 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Company;
+use App\Models\Language;
+use App\Models\Notification;
 use App\Models\UsersToken;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -57,9 +62,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function language()
+    public function company(): BelongsToMany
     {
-        return $this->belongsTo(UserLanguage::class);
+        return $this->belongsToMany(Company::class, 'user_company', 'user_id', 'company_id');
+    }
+
+    public function language(): BelongsToMany
+    {
+        return $this->belongsToMany(Language::class, 'user_language', 'user_id', 'language_id');
+    }
+
+    public function notification(): HasOne
+    {
+        return $this->hasOne(Notification::class, 'notification_id');
     }
 
     public function roles(){

@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
-use App\Models\UserNotification;
+use App\Models\NotificationSystem;
 use App\Services\ChangeLanguageService;
 
 class NotificationService
@@ -13,7 +13,7 @@ class NotificationService
         $changeLanguage = new ChangeLanguageService;
         $changeLanguage->changeLanguage($languageId);
 
-        $notificationId = UserNotification::where('user_id', $id)->value('system');
+        $notificationId = NotificationSystem::where('user_id', $id)->value('system');
 
         if ($notificationId == 1) {
             $user = User::find($id);
@@ -38,7 +38,7 @@ class NotificationService
         $changeLanguage = new ChangeLanguageService;
         $changeLanguage->changeLanguage($languageId);
 
-        $notificationId = UserNotification::where('user_id', $id)->value('system');
+        $notificationId = NotificationSystem::where('user_id', $id)->value('system');
 
         if ($notificationId == 1) {
             $user = User::find($id);
@@ -67,7 +67,7 @@ class NotificationService
     {
         $changeLanguage = new ChangeLanguageService;
         $changeLanguage->changeLanguage($languageId);
-        $notificationId = UserNotification::where('user_id', $id)->value('system');
+        $notificationId = NotificationSystem::where('user_id', $id)->value('system');
 
         if ($notificationId == 1) {
             $user = User::find($id);

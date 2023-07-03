@@ -1,14 +1,14 @@
 <?php
 namespace App\Services;
 
-use App\Models\UserNotification;
+use App\Models\NotificationSystem;
 
 class NotificationSystemService
 {
 
     public function notificationSystem($userId)
     {
-        $notification = UserNotification::join('users', 'users.id', 'user_notification.user_id')
+        $notification = NotificationSystem::join('users', 'users.id', 'user_notification.user_id')
             ->where('users.id', $userId)
             ->select('user_notification.system')
             ->first();
@@ -16,14 +16,14 @@ class NotificationSystemService
         $systemValue = (int) $notification->system;
 
         if ($systemValue == 1) {
-            UserNotification::join('users', 'users.id', 'user_notification.user_id')
+            NotificationSystem::join('users', 'users.id', 'user_notification.user_id')
                 ->where('users.id', $userId)
                 ->update(['user_notification.system' => 0]);
 
             return 'Notifications off';
         }
         if ($systemValue == 0) {
-            UserNotification::join('users', 'users.id', 'user_notification.user_id')
+            NotificationSystem::join('users', 'users.id', 'user_notification.user_id')
                 ->where('users.id', $userId)
                 ->update(['user_notification.system' => 1]);
 

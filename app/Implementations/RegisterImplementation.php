@@ -10,7 +10,7 @@ use App\Models\RolesUser;
 use App\Models\Token;
 use App\Models\User;
 use App\Models\UserLanguage;
-use App\Models\UserNotification;
+use App\Models\NotificationSystem;
 use App\Models\UsersToken;
 use Spatie\Permission\Models\Role;
 
@@ -43,7 +43,7 @@ class RegisterImplementation implements RegisterInterface
                 'language_id' => 1,
             ]);
 
-            UserNotification::create([
+            NotificationSystem::create([
                 'user_id' => $user->id,
                 'system'  => 1,
             ]);
