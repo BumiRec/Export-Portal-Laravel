@@ -24,8 +24,8 @@ class SummaryInformationService
             ->join('company_categories', 'company_categories.id', 'company.category_id')
             ->join('company_subcategories', 'company_subcategories.id', 'company.subcategory_id')
             ->where('user_id', $userId)
-            ->get(['company.id', 'company.name as company name', 'company.keywords', 'company.country', 'company.web_address', 'company.more_info',
-                'company.budged', 'company.type', 'company_categories.name as category name', 'company_subcategories.name as subcategory name', 'company.membership', 'company_status.status']);
+            ->get(['company.id', 'company.name as company_name', 'company.keywords', 'company.country', 'company.web_address', 'company.more_info',
+                'company.budged', 'company.type', 'company_categories.name as category_name', 'company_subcategories.name as subcategory_name', 'company.membership', 'company_status.status']);
     }
 
     public function companyUser($userId)
