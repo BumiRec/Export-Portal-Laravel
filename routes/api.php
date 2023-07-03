@@ -145,7 +145,7 @@ Route::get('/companyData/{userId}', [SummaryInformationController::class, 'compa
 
 Route::get('/userCompany/{userId}', [SummaryInformationController::class, 'userCompany']);
 
-Route::get('/userData/{userId}', [SummaryInformationController::class, 'user']);
+Route::get('/userInfo/{userId}', [SummaryInformationController::class, 'user']);
 //view Announcements
 Route::get('/viewAnnouncements', [AnnouncementsController::class, 'viewAnnouncements']);
 //Update product
