@@ -47,10 +47,11 @@ class SearchService
     }
 
     public function searchUser(SearchRequest $search){
-        $users =  User::where('name', 'like', '%'.$search->search.'%')
+        $users =  User::join('countries as c', 'users.country_id', 'c.id')
+        ->where('name', 'like', '%'.$search->search.'%')
         ->orWhere('surname', 'like', '%'.$search->search.'%')
         ->orWhere('email', 'like', '%'.$search->search.'%')
-        ->select(['name', 'surname', 'email', 'phone_number', 'gender'])
+        ->select(['users.id', 'users.name', 'users.surname', 'users.email', 'users.phone_number', 'c.country'])
         ->paginate(10);
 
         $numPages = $users->lastPage();
