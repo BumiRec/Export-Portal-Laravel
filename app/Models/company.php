@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Company extends Model
 {
@@ -26,4 +28,9 @@ class Company extends Model
         'profile_picture',
         'membership',
     ];
+
+    public function user():BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'user_company', 'user_id', 'company_id');
+    }
 }

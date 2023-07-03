@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\User;
 use App\Models\UserCompany;
 
 class SummaryInformationService
@@ -29,9 +30,21 @@ class SummaryInformationService
 
     public function companyUser($userId)
     {
+        $user      = User::with('company:id,name')->find($userId);
+        $companies = $user->company;
 
-        return UserCompany::join('company as c', 'c.id', 'user_company.company_id')
-            ->where('user_id', $userId)
-            ->get(['c.id', 'c.name']);
+        $companyData = [];
+
+        foreach ($companies as $company) {
+            $companyData = [
+                'id'   => $company->id,
+                'name' => $company->name];
+
+        }
+        return $companyData;
+
+        // return UserCompany::join('company as c', 'c.id', 'user_company.company_id')
+        //     ->where('user_id', $userId)
+        //     ->get(['c.id', 'c.name']);
     }
 }
