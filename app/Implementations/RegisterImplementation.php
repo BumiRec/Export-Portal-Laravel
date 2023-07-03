@@ -47,10 +47,7 @@ class RegisterImplementation implements RegisterInterface
                 'system'  => 1,
             ]);
 
-            // $role = Role::where('name', 'user')->first();
-            // if ($role) {
-            //     event(new AssignUserRole($user, $role));
-            // }
+
 
         }
 
