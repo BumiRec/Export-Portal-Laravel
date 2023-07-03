@@ -12,4 +12,8 @@ class CompanyStatus extends Model
     public $table = 'company_status';
 
     protected $fillable = ['status'];
+
+    public function company(){
+        return $this -> hasOne(Company::class, 'status_id');
+    }
 }

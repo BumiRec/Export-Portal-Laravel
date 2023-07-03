@@ -12,4 +12,12 @@ class CompanyCategory extends Model
     protected $table = 'company_categories';
 
     protected $fillable = ['category'];
+
+    public function company(){
+        return $this->hasMany(Company::class, 'category_id');
+    }
+
+    public function subcategory(){
+        return $this -> hasMany(CompanySubategory::class, 'category_id');
+    }
 }

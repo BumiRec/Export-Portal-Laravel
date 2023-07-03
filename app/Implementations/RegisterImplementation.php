@@ -6,6 +6,7 @@ use App\Events\AssignUserRole;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\UsersTokenRequest;
 use App\Interfaces\RegisterInterface;
+use App\Models\RolesUser;
 use App\Models\Token;
 use App\Models\User;
 use App\Models\UserLanguage;
@@ -47,7 +48,10 @@ class RegisterImplementation implements RegisterInterface
                 'system'  => 1,
             ]);
 
-
+            RolesUser::create([
+                'user_id' => $user->id,
+                'roles_id'  => 2,
+            ]);     
 
         }
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\UsersToken;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -63,6 +64,14 @@ class User extends Authenticatable
 
     public function roles(){
         return $this->belongsToMany(Roles::class, 'roles_user', 'roles_id', 'user_id');
+    }
+
+    public function country(){
+        return $this -> belongsTo(Countries::class, 'country_id');
+    }
+
+    public function userToken(){
+        return $this -> hasOne(UsersToken::class, 'user_id');
     }
 
 }

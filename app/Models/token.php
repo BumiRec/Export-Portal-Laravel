@@ -12,4 +12,8 @@ class Token extends Model
 
     protected $fillable = ['amount'];
 
+    public function userToken(){
+        return $this->hasOne(UsersToken::class, 'token_id');
+    }
+
 }

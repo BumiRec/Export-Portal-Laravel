@@ -13,4 +13,13 @@ class ActivityCompany extends Model
 
     public $table       = 'activity_company';
     protected $fillable = ['activity_area_id', 'company_id'];
+
+    public function company(){
+        return $this->belongsTo(Company::class, 'company_id');
+    }
+
+    public function activityArea(){
+        return $this->belongTo(ActivityArea::class, 'activity_area_id');
+    }
+    
 }
