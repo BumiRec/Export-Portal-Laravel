@@ -39,7 +39,7 @@ class SummaryInformationService
     public function userData($userId){
         return User::join('countries as c', 'users.country_id', 'c.id')
         ->where('users.id', $userId)
-        ->get([ 'users.name', 'users.surname', 'users.email', 'users.phone_number', 'c.country']);
+        ->get([ 'users.name', 'users.surname', 'users.email', 'users.phone_number', 'c.country', 'users.gender']);
     }
 }
  
