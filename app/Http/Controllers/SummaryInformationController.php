@@ -26,4 +26,8 @@ class SummaryInformationController extends Controller
 
         return response()->json($this->summaryInformationService->companyUser($userId), 200);
     }
+
+    public function user($userId){
+        return response()->json($this->summaryInformationService->userData($userId), 200);
+    }
 }
