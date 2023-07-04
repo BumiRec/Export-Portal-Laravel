@@ -40,5 +40,25 @@ class Product extends Model
     {
         return $this->belongsTo(ExportProduct::class, 'product_id');
     }
+
+    public function category(){
+        return $this-> belongsTo(ProductCategory::class, 'category_id');
+    }
+
+    public function subcategory(){
+        return $this-> belongsTo(ProductCategory::class, 'subcategory_id');
+    }
+
+    public function company(){
+        return $this-> belongsTo(Company::class, 'company_id');
+    }
+
+    public function buyer(){
+        return $this -> belongsToMany(User::class, 'buyer_list', 'product_id', 'user_id');
+    }
+
+    public function sellerConfirmation(){
+        return $this-> hasOne(SellerConfirmation::class, 'product_id');
+    }
 }
 
