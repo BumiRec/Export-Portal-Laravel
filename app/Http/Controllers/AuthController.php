@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthRequest;
 use App\Services\AuthService;
+use App\Services\ChangeLanguageService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -13,7 +13,8 @@ class AuthController extends Controller
 
     private AuthService $authService;
 
-    public function __construct(AuthService $authService){
+    public function __construct(AuthService $authService)
+    {
         $this->authService = $authService;
     }
 
@@ -22,10 +23,10 @@ class AuthController extends Controller
         return response()->json($this->authService->createAuth($authRequest));
     }
 
-    public function logout(Request $request, $language)
+    public function logout(Request $request, $languageId)
     {
-        $locale = config('app.available_locales');
-        App::setLocale($locale[$language]);
+        $changeLanguage = new ChangeLanguageService;
+        $changeLanguage->changeLanguage($languageId);
 
         Auth::guard('web')->logout();
 
