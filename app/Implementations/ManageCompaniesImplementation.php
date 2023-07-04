@@ -17,82 +17,134 @@ use App\Models\SellerConfirmation;
 use App\Models\SellerList;
 use App\Models\SuccessStories;
 use App\Models\Transaction;
+use App\Models\User;
 use App\Models\UserCompany;
+use App\Notifications\NotificationsByAdmin;
 
 class ManageCompaniesImplementation implements ManageCompaniesInterface
 {
 
     public function updateCompany(ManageCompaniesRequest $manageCompaniesRequest, $companyId)
     {
+        $admin = User::whereHas('roles', function ($query) {
+            $query->where('name', 'admin');
+        })->first();
+
+        if (!$admin) {
+            return 'Admin not found';
+        }
 
         $updateCompany = Company::find($companyId);
-        $updateCompany->update($manageCompaniesRequest->validated());
 
-        if ($updateCompany) {
-            return 'Company updated succesfuly';
-        } else {
+        if (!$updateCompany) {
             return 'Company not found';
         }
+
+        $updateCompany->update($manageCompaniesRequest->validated());
+
+        $userIds       = UserCompany::where('company_id', $updateCompany->id)->pluck('user_id')->toArray();
+        $companyOwners = User::whereIn('id', $userIds)->get();
+
+        foreach ($companyOwners as $user) {
+            $notification = new NotificationsByAdmin(null, $updateCompany);
+            $user->notify($notification);
+        }
+
+        return 'Company updated successfully';
     }
 
     public function deleteCompany($companyId)
     {
+        $admin = User::whereHas('roles', function ($query) {
+            $query->where('name', 'admin');
+        })->first();
+
+        if (!$admin) {
+            return 'Admin not found';
+        }
 
         $company = Company::find($companyId);
 
-        $products = Product::where('company_id', $company->id)->get();
+        if (!$company) {
+            return 'Company not found';
+        }
 
-       // return $product;
+        $userIds       = UserCompany::where('company_id', $company->id)->pluck('user_id')->toArray();
+        $companyOwners = User::whereIn('id', $userIds)->get();
+        $products      = Product::where('company_id', $company->id)->get();
+        foreach ($companyOwners as $user) {
+            $notification = new NotificationsByAdmin(null, $company);
+            $user->notify($notification);
+        }
 
-       foreach($products as $product){
-        ExportProduct::where('product_id', $product->id)->delete();
-        ImportProduct::where('product_id', $product->id)->delete();
-       }
+        foreach ($products as $product) {
+            ExportProduct::where('product_id', $product->id)->delete();
+            ImportProduct::where('product_id', $product->id)->delete();
+            Transaction::where('product_id', $product->id)->delete();
+            SellerConfirmation::where('product_id', $product->id)->delete();
+            SellerList::where('product_id', $product->id)->delete();
+            BuyerConfirmation::where('product_id', $product->id)->delete();
+            BuyerList::where('product_id', $product->id)->delete();
+            FileHasProduct::where('product_id', $product->id)->delete();
+        }
 
         UserCompany::where('company_id', $company->id)->delete();
-
         ActivityCompany::where('company_id', $company->id)->delete();
-
         Product::where('company_id', $company->id)->delete();
-
         SuccessStories::where('company_id', $company->id)->delete();
-
         Corporate::where('company_id', $company->id)->delete();
 
         $company->delete();
 
-        return 'Company deleted successfuly';
-
+        return 'Company deleted successfully';
     }
 
-
-    public function deleteProduct($productId){
+    public function deleteProduct($productId)
+    {
+        $admin = User::whereHas('roles', function ($query) {
+            $query->where('name', 'admin');
+        })->first();
 
         $product = Product::find($productId);
 
-        $buyerId = BuyerConfirmation::where('product_id', $product->id)->get();
+        if (!$admin) {
+            return 'Admin not found';
+        }
 
-       //return $buyerId;
+        if (!$product) {
+            return 'Product not found';
+        }
 
-        // foreach($buyerId as $id){
-        //     BuyerList::where('buyer_id', $id->id)->delete();
-        // }
-    
+        $buyerId = BuyerConfirmation::where('product_id', $product->id)->pluck('id');
+
+        $userIds = UserCompany::join('company', 'user_company.company_id', '=', 'company.id')
+            ->join('product', 'company.id', '=', 'product.company_id')
+            ->where('product.id', $product->id)
+            ->pluck('user_company.user_id');
+        $companyName = UserCompany::join('company', 'user_company.company_id', '=', 'company.id')
+            ->join('product', 'company.id', '=', 'product.company_id')
+            ->where('product.id', $product->id)
+            ->pluck('company.name');
+
+        $companyOwners = User::whereIn('id', $userIds)->get();
+
+        foreach ($companyOwners as $user) {
+            $notification = new NotificationsByAdmin($product, $companyName);
+            $user->notify($notification);
+        }
+        BuyerList::whereIn('buyer_id', $buyerId)->delete();
+
         ExportProduct::where('product_id', $product->id)->delete();
         ImportProduct::where('product_id', $product->id)->delete();
-    
         Transaction::where('product_id', $product->id)->delete();
         SellerConfirmation::where('product_id', $product->id)->delete();
         SellerList::where('product_id', $product->id)->delete();
-    
         BuyerConfirmation::where('product_id', $product->id)->delete();
-    
-        BuyerList::where('product_id', $product->id)->delete();
         FileHasProduct::where('product_id', $product->id)->delete();
-        
 
         $product->delete();
 
-        return 'Product deleted sucessfuly';
+        return 'Product deleted successfully';
     }
+
 }

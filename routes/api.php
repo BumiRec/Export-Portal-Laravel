@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AddProduct;
 use App\Http\Controllers\AnnouncementsController;
 use App\Http\Controllers\AuthController;
@@ -24,12 +23,12 @@ use App\Http\Controllers\MailFormController;
 use App\Http\Controllers\ManageCompaniesController;
 use App\Http\Controllers\ModifyItem;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\NotificationsByAdminController;
 use App\Http\Controllers\NotificationSystemController;
 use App\Http\Controllers\NotifyBuyerInterested;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SellerListController;
 use App\Http\Controllers\SuccessStoriesController;
@@ -107,7 +106,7 @@ Route::get('/filterProduct/{id}', [FilterProductController::class, 'filterProduc
 Route::get('/buyerList/{id}', [BuyerListController::class, 'interestedProduct']);
 
 //Notification for the buyer that is interested in a product
-Route::get('/addNotify/{Oid}/{Pid}/{Uid}/{lang}', [NotifyBuyerInterested::class, 'notify']);
+Route::get('/addNotify/{Oid}/{Uid}/{Pid}/{lang}', [NotifyBuyerInterested::class, 'notify']);
 
 //Products people are interested in for company
 Route::get('/sellerList', [SellerListController::class, 'interestedIn']);
@@ -121,6 +120,12 @@ Route::get('/showAllNotify/{id}/{lang}', [ListNotificationsController::class, 's
 Route::get('/showUnReadNotify/{id}/{lang}', [ListNotificationsController::class, 'showUnReadNotifications']);
 
 Route::get('/MarkAsReadNotify/{id}/{lang}', [ListNotificationsController::class, 'markAsReadNotify']);
+
+Route::get('/showAllNotifyByAdmin/{id}/{lang}', [NotificationsByAdminController::class, 'showAllNotifyByAdmin']);
+
+Route::get('/showUnReadNotificationsByAdmin/{id}/{lang}', [NotificationsByAdminController::class, 'showUnReadNotificationsByAdmin']);
+
+Route::get('/markAsReadNotifyByAdmin/{id}/{lang}', [NotificationsByAdminController::class, 'markAsReadNotifyByAdmin']);
 
 //
 Route::get('/corporate/{id}', [CorporateController::class, 'showCorporate']);
@@ -156,6 +161,9 @@ Route::put('/updateToken/{id}/{lang}', [TokenController::class, 'updateToken']);
 
 //Updating User Profile Data
 Route::put('/updateUser/{id}/{lang}', [UpdateProfileUserController::class, 'update']);
+
+//Updating User Profile Data from Admin
+Route::put('/updateUserByAdmin/{id}/{lang}', [UpdateProfileUserController::class, 'updateUserByAdmin']);
 
 //Forgot password
 Route::put('/password/{lang}', [PasswordController::class, 'password']);
@@ -237,7 +245,7 @@ Route::delete('/deleteProduct/{id}/{lang}', [BuyerListController::class, 'delete
 //Delete a product from InterestedInList
 Route::delete('/delete/{id}/{langId}', [SellerListController::class, 'destroy']);
 
-Route::delete('/deleteFile/{id}/{langId}', [FileUpdateDeleteController::class, 'deleteFile']);
+Route::delete('/deleteFile/{id}/{lang}', [FileUpdateDeleteController::class, 'deleteFile']);
 
 Route::delete('/deleteCompany/{companyId}', [ManageCompaniesController::class, 'companyDeleted']);
 
@@ -246,6 +254,7 @@ Route::delete('/deleteProduct/{productId}', [ManageCompaniesController::class, '
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::get('/', function () {
     return view('welcome');
 });

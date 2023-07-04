@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Interfaces;
+
 use App\Http\Requests\CompanyRequest;
-use App\Models\Company;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-interface CompanyInterface{
+interface CompanyInterface
+{
 
-    public function createCompany(CompanyRequest $companyRequest, $userId):Company;
+    public function createCompany(CompanyRequest $companyRequest, $userId): mixed;
 
-    public function companyList():JsonResource;
+    public function companyList(): JsonResource;
 
 }

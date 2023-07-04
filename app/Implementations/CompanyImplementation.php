@@ -11,8 +11,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class CompanyImplementation implements CompanyInterface
 {
 
-    public function createCompany(CompanyRequest $companyRequest, $userId): Company
+    public function createCompany(CompanyRequest $companyRequest, $userId): mixed
     {
+
         $company = Company::create(
             [
                 'name'            => $companyRequest['name'],
