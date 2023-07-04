@@ -42,4 +42,6 @@ class Product extends Model
     {
         return $this->belongsTo(ExportProduct::class, 'product_id');
     }
+
+    
 }
