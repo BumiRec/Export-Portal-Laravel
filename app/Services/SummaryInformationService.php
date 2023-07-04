@@ -30,18 +30,20 @@ class SummaryInformationService
 
     public function companyUser($userId)
     {
-        $user      = User::with('company:id,name')->find($userId);
+        $user = User::with('company:id,name')->find($userId);
         $companies = $user->company;
-
+    
         $companyData = [];
-
+    
         foreach ($companies as $company) {
-            $companyData = [
+            $companyData[] = [
                 'id'   => $company->id,
-                'name' => $company->name];
-
+                'name' => $company->name
+            ];
         }
+    
         return $companyData;
+   
 
         // return UserCompany::join('company as c', 'c.id', 'user_company.company_id')
         //     ->where('user_id', $userId)
