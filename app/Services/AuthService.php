@@ -17,7 +17,7 @@ class AuthService
 
             $user = Auth::user();
 
-            $languageId     = UserLanguage::where('user_id', $user->id)->value('language_id');
+            $languageId     = UserLanguage::whereBelongsTo($user)->get('language_id');
             $notificationId = NotificationSystem::where('user_id', $user->id)->value('system');
             $responseData   = [
                 'message'        => __('messages.welcome'),
