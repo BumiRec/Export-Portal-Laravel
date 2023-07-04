@@ -9,10 +9,7 @@ class test extends Controller
     public function test()
     {
 
-        $users = User::whereHas('roles', function ($query) {
-            $query->where('name', 'user');
-        })->get();
-
+        $users = User::role('admin')->get();
         return $users;
     }
 }

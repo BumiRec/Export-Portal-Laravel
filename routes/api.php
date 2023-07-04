@@ -23,6 +23,7 @@ use App\Http\Controllers\MailFormController;
 use App\Http\Controllers\ManageCompaniesController;
 use App\Http\Controllers\ModifyItem;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\NotificationsByAdminController;
 use App\Http\Controllers\NotificationSystemController;
 use App\Http\Controllers\NotifyBuyerInterested;
 use App\Http\Controllers\PasswordController;
@@ -105,7 +106,7 @@ Route::get('/filterProduct/{id}', [FilterProductController::class, 'filterProduc
 Route::get('/buyerList/{id}', [BuyerListController::class, 'interestedProduct']);
 
 //Notification for the buyer that is interested in a product
-Route::get('/addNotify/{Oid}/{Pid}/{Uid}/{lang}', [NotifyBuyerInterested::class, 'notify']);
+Route::get('/addNotify/{Oid}/{Uid}/{Pid}/{lang}', [NotifyBuyerInterested::class, 'notify']);
 
 //Products people are interested in for company
 Route::get('/sellerList', [SellerListController::class, 'interestedIn']);
@@ -119,6 +120,12 @@ Route::get('/showAllNotify/{id}/{lang}', [ListNotificationsController::class, 's
 Route::get('/showUnReadNotify/{id}/{lang}', [ListNotificationsController::class, 'showUnReadNotifications']);
 
 Route::get('/MarkAsReadNotify/{id}/{lang}', [ListNotificationsController::class, 'markAsReadNotify']);
+
+Route::get('/showAllNotifyByAdmin/{id}/{lang}', [NotificationsByAdminController::class, 'showAllNotifyByAdmin']);
+
+Route::get('/showUnReadNotificationsByAdmin/{id}/{lang}', [NotificationsByAdminController::class, 'showUnReadNotificationsByAdmin']);
+
+Route::get('/markAsReadNotifyByAdmin/{id}/{lang}', [NotificationsByAdminController::class, 'markAsReadNotifyByAdmin']);
 
 //
 Route::get('/corporate/{id}', [CorporateController::class, 'showCorporate']);
@@ -151,6 +158,9 @@ Route::put('/updateToken/{id}/{lang}', [TokenController::class, 'updateToken']);
 
 //Updating User Profile Data
 Route::put('/updateUser/{id}/{lang}', [UpdateProfileUserController::class, 'update']);
+
+//Updating User Profile Data from Admin
+Route::put('/updateUserByAdmin/{id}/{lang}', [UpdateProfileUserController::class, 'updateUserByAdmin']);
 
 //Forgot password
 Route::put('/password/{lang}', [PasswordController::class, 'password']);
