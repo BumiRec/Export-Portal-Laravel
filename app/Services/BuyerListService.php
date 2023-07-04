@@ -10,7 +10,7 @@ class BuyerListService
         $interestedAt = BuyerList::join('product', 'buyer_list.product_id', 'product.id')
             ->join('users', 'buyer_list.user_id', 'users.id')
             ->where('users.id', $id)
-            ->get(['product.name', 'product.description', 'product.price']);
+            ->get(['product.id','product.name', 'product.description', 'product.price']);
         return $interestedAt;
     }
 }
