@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Models\User;
 use App\Models\NotificationSystem;
+use App\Models\User;
 use App\Services\ChangeLanguageService;
 
 class NotificationService

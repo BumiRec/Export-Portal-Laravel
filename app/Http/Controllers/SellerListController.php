@@ -15,9 +15,9 @@ class SellerListController extends Controller
         $this->sellerListInterface = $sellerListInterface;
     }
 
-    public function interestedIn(SellerService $sellerService)
+    public function interestedIn(SellerService $sellerService, $userId)
     {
-        return response()->json($this->sellerService->showInterestedIn(), 200);
+        return response()->json($this->sellerService->showInterestedIn($userId), 200);
     }
 
     public function destroy(SellerListInterface $sellerListInterface, $id, $languageId)

@@ -109,7 +109,7 @@ Route::get('/buyerList/{id}', [BuyerListController::class, 'interestedProduct'])
 Route::get('/addNotify/{Oid}/{Uid}/{Pid}/{lang}', [NotifyBuyerInterested::class, 'notify']);
 
 //Products people are interested in for company
-Route::get('/sellerList', [SellerListController::class, 'interestedIn']);
+Route::get('/sellerList/{userId}', [SellerListController::class, 'interestedIn']);
 
 //Getting data for the "Form" communication
 Route::get('/form/{id}', [MailFormController::class, 'mailForm']);
