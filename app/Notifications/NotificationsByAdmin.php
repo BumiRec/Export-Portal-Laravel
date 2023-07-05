@@ -49,9 +49,9 @@ class NotificationsByAdmin extends Notification
     public function toArray($notifiable): array
     {
         return [
-            'user_id' => $notifiable->id,
-            'Company' => $this->company['name'] ?? 'N/A',
-            'Product' => $this->product['name'] ?? 'All',
+            'notifiable_id' => $notifiable->id,
+            'Company'       => $this->company ?? 'N/A',
+            'Product'       => $this->product['name'] ?? 'N/A',
         ];
     }
 }

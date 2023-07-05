@@ -47,8 +47,8 @@ class NotificationsUpdateUserProfileByAdmin extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'user_id'   => $notifiable->id,
-            'Full Name' => $this->user['name'] . ' ' . $this->user['surname'],
+            'notifiable_id' => $notifiable->id,
+            'Full Name'     => $this->user['name'] . ' ' . $this->user['surname'],
         ];
     }
 }

@@ -124,8 +124,8 @@ class ManageCompaniesImplementation implements ManageCompaniesInterface
         $companyName = UserCompany::join('company', 'user_company.company_id', '=', 'company.id')
             ->join('product', 'company.id', '=', 'product.company_id')
             ->where('product.id', $product->id)
-            ->pluck('company.name');
-
+            ->value('company.name');
+        echo $companyName;
         $companyOwners = User::whereIn('id', $userIds)->get();
 
         foreach ($companyOwners as $user) {
