@@ -29,6 +29,7 @@ use App\Http\Controllers\NotifyBuyerInterested;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SellerListController;
 use App\Http\Controllers\SuccessStoriesController;
