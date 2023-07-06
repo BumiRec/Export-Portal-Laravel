@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\Language;
 use App\Models\Notification;
 use App\Models\UsersToken;
+use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;

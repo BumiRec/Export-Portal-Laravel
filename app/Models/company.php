@@ -69,19 +69,25 @@ class Company extends Model
         return $this->hasMany(Product::class, 'company_id');
     }
 
-    protected static function boot(){
+    /**
+     * Summary of boot
+     * @return void
+     */
+    // protected static function boot(){
 
-        parent::boot();
+    //     parent::boot();
 
-        static::created(function ($company){
-            $user = $company->user;
-            // $role = $user->roles;
-            // $user->$role->attach(3);
+    //     static::created(function ($company){
+    //         $companyId = $company->id;
+    //         $user = User::join('user_company', 'user_company.user_id', 'users.id')
+    //         ->join('company', 'company.id', 'user_company.user_id')
+    //         ->where('company.id', $companyId)
+    //         ->get(['users.id']);
+    //         $role = Role::find(3); // Assuming role ID 3 represents the desired role
+    
+    //         if ($user && $role) {
+    //             $user->roles()->attach($role);}
+    //     });
+    // }
 
-            $ownerRole = Role::where('name', 'owner')->first();
-            if ($user && $ownerRole) {
-                $user->roles()->attach($ownerRole);
-            }
-        });
-    }
 }
