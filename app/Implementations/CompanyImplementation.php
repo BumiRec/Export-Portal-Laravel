@@ -50,12 +50,9 @@ class CompanyImplementation implements CompanyInterface
         $user = User::find($userId);
         $role = Role::find(3);
 
-        $userRole = Role::whereBelongsTo($user)->get('id');
-        if ($userRole != 3) {
-            if ($user && $role) {
-                $user->roles()->attach($role);
-            }
-        }
+    if ($user && $role) {
+        $user->roles()->syncWithoutDetaching($role);
+    }
         return $company;
 
     }
