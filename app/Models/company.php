@@ -68,4 +68,20 @@ class Company extends Model
     {
         return $this->hasMany(Product::class, 'company_id');
     }
+
+    protected static function boot(){
+
+        parent::boot();
+
+        static::created(function ($company){
+            $user = $company->user;
+            // $role = $user->roles;
+            // $user->$role->attach(3);
+
+            $ownerRole = Role::where('name', 'owner')->first();
+            if ($user && $ownerRole) {
+                $user->roles()->attach($ownerRole);
+            }
+        });
+    }
 }

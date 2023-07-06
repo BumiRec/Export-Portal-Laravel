@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Roles;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -19,7 +19,7 @@ class AssignUserRole
      */
     public $user;
     public $role;
-    public function __construct(User $user, Roles $role)
+    public function __construct(User $user, Role $role)
     {
         $this->user = $user;
         $this->role = $role;
