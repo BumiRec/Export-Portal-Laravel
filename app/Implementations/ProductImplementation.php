@@ -2,6 +2,7 @@
 
 namespace App\Implementations;
 
+use App\Events\ProductCreated;
 use App\Http\Requests\AddProductRequest;
 use App\Interfaces\ProductInterface;
 use App\Models\ExportProduct;
@@ -10,7 +11,7 @@ use App\Models\Product;
 
 class ProductImplementation implements ProductInterface
 {
-    public function createProduct(AddProductRequest $addProductRequest): Product
+    public function createProduct(AddProductRequest $addProductRequest)
     {
         $product = Product::create([
             'name'           => $addProductRequest['name'],
@@ -32,10 +33,7 @@ class ProductImplementation implements ProductInterface
         if ($typeImportExport == 'import') {
             $this->createImportProduct($productId);
         }
-
-        $data = $product;
-
-        $addProductRequest->session()->put('stored_data', $data);
+        event(new ProductCreated($productId));
 
         return $product;
     }

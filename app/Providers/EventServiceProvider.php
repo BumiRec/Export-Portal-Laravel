@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\ProductCreated;
+use App\Listeners\ProductCreatedListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -21,6 +23,9 @@ class EventServiceProvider extends ServiceProvider
         AssignUserRole::class => [
             AssignUserRoleListener::class,
         ],
+        ProductCreated::class => [
+            ProductCreatedListener::class,
+        ],
     ];
 
     /**
@@ -36,6 +41,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function shouldDiscoverEvents(): bool
     {
-        return false;
+        return true;
     }
 }
