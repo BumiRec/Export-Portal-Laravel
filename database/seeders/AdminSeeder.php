@@ -15,8 +15,8 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
 
-        $AdminRole  = Role::create(['name' => 'admin']);
-        $permission = Permission::create(['name' => 'Edit User Profile']);
+        // $AdminRole  = Role::create(['name' => 'admin']);
+        // $permission = Permission::create(['name' => 'Edit User Profile']);
         $user       = User::factory()->create([
             'name'         => 'Geri',
             'email'        => 'geri@protonmail.ch',
@@ -26,7 +26,7 @@ class AdminSeeder extends Seeder
             'gender'       => 'm',
             'password'     => bcrypt('123'),
         ]);
-        $user->assignRole($AdminRole);
-        $permission->assignRole($AdminRole);
+        // $user->assignRole($AdminRole);
+        // $permission->assignRole($AdminRole);
     }
 }

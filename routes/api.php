@@ -161,7 +161,7 @@ Route::put('/product/{id}', [ModifyItem::class, 'update']);
 Route::put('/updateToken/{id}/{lang}', [TokenController::class, 'updateToken']);
 
 //Updating User Profile Data
-Route::put('/updateUser/{id}/{lang}', [UpdateProfileUserController::class, 'update']);
+Route::put('/updateUser/{id}/{lang}', [UpdateProfileUserController::class, 'updateUser']);
 
 //Updating User Profile Data from Admin
 Route::put('/updateUserByAdmin/{id}/{lang}', [UpdateProfileUserController::class, 'updateUserByAdmin']);

@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Roles extends Model
+class Role extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,7 @@ class Roles extends Model
     ];
 
     public function users(){
-        return $this->belongsToMany(User::class, 'roles_user', 'roles_id', 'user_id');
+        return $this->belongsToMany(User::class, 'roles_user', 'user_id', 'roles_id');
     }
 
 }

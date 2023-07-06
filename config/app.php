@@ -192,4 +192,8 @@ return [
     //     'Captcha' => Mews\Captcha\Facades\Captcha::class,
     // ])->toArray(),
 
+    'aliases' => [
+        'Permission' => Spatie\Permission\Facades\Permission::class,
+    ],
+
 ];

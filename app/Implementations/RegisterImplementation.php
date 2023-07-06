@@ -48,10 +48,13 @@ class RegisterImplementation implements RegisterInterface
                 'system'  => 1,
             ]);
 
-            RolesUser::create([
-                'user_id' => $user->id,
-                'roles_id'  => 2,
-            ]);     
+            // RolesUser::create([
+            //     'user_id' => $user->id,
+            //     'roles_id'  => 2,
+            // ]);     
+
+            // User::find($user->id);
+            // $user->assignRole(1);
 
         }
 
