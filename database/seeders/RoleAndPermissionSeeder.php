@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -14,18 +13,55 @@ class RoleAndPermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        $userRole = Role::create(['name' => 'user']);
-        $adminRole = Role::create(['name' => 'admin']);
-        $ownerRole = Role::create(['name' => 'owner']);
+        $userRole           = Role::create(['name' => 'user']);
+        $adminRole          = Role::create(['name' => 'admin']);
+        $ownerRole          = Role::create(['name' => 'owner']);
         $representativeRole = Role::create(['name' => 'representative']);
-        
-        $crateCompany = Permission::create(['name' => 'create company']);
-        $updateCompany = Permission::create(['name' => 'update company']);
 
-        $adminRole->givePermissionTo([$crateCompany, $updateCompany]);
-        $ownerRole->givePermissionTo([$crateCompany, $updateCompany]);
-        $userRole->givePermissionTo([$crateCompany, $updateCompany]);
-        $representativeRole->givePermissionTo([$crateCompany, $updateCompany]);
+        $createCompany         = Permission::create(['name' => 'create company']);
+        $logout                = Permission::create(['name' => 'logout']);
+        $activityArea          = Permission::create(['name' => 'activity area for company']);
+        $addProduct            = Permission::create(['name' => 'create product']);
+        $buyConfirmed          = Permission::create(['name' => 'buy confirmation']);
+        $sellConfirmed         = Permission::create(['name' => 'sell confirmation']);
+        $buyerList             = Permission::create(['name' => 'buyer list']);
+        $sellerList            = Permission::create(['name' => 'seller list']);
+        $subscribeToNewsletter = Permission::create(['name' => 'subscribe to newsletter']);
+        $sendNewsletter        = Permission::create(['name' => 'send newsletter']);
+        $addFile               = Permission::create(['name' => 'add a file']);
+        $searchCompany         = Permission::create(['name' => 'search company']);
+        $searchUser            = Permission::create(['name' => 'search user']);
+        $searchProduct         = Permission::create(['name' => 'search product']);
+        $sendSupportEmail      = Permission::create(['name' => 'send suport e-mail']);
+        $addSuccessStories     = Permission::create(['name' => 'add a success story']);
+        $addAnnounements       = Permission::create(['name' => 'add announcements']);
+
+        $deleteProduct = Permission::create(['name' => 'delete a product']);
+        $deleteFile    = Permission::create(['name' => 'delete a file']);
+        $deleteCompany = Permission::create(['name' => 'delete a company']);
+
+        $updateCompany       = Permission::create(['name' => 'update company']);
+        $updateUser          = Permission::create(['name' => 'update user profile']);
+        $changePassword      = Permission::create(['name' => 'change password']);
+        $announcementsUpdate = Permission::create(['name' => 'update announcements']);
+        $updateCategory      = Permission::create(['name' => 'update category for company']);
+        $updateCompanyStatus = Permission::create(['name' => 'update company status']);
+        $uploadFile          = Permission::create(['name' => 'upload a file']);
+
+        //admin roles
+        $adminRole->givePermissionTo([$createCompany, $updateCompanyStatus, $addProduct, $sendNewsletter,
+            $searchUser, $addSuccessStories, $addAnnounements, $announcementsUpdate, $deleteCompany,
+            $uploadFile, $deleteProduct, $changePassword]);
+
+        //owner roles
+        $ownerRole->givePermissionTo([$createCompany, $updateCompany, $sellConfirmed, $sellerList, $addFile,
+            $deleteFile, $changePassword, $updateCategory, $uploadFile]);
+
+        //user roles
+        $userRole->givePermissionTo([$createCompany, $updateCompany, $logout, $activityArea, $buyConfirmed,
+            $buyerList, $subscribeToNewsletter, $searchCompany, $searchProduct, $sendSupportEmail, $updateUser, $changePassword]);
+
+        $representativeRole->givePermissionTo([$createCompany, $updateCompany]);
 
     }
 }

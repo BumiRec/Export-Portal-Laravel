@@ -17,13 +17,14 @@ class PrioritySeeder extends Seeder
             CompanySubcategorySeeder::class,
             ProductSubcategorySeeder::class,
             ActivityAreaSeeder::class,
-            AdminSeeder::class,
+            // AdminSeeder::class,
             CountrySeeder::class,
             FileTypeSeeder::class,
             LanguageSeeder::class,
             CompanyStatusSeeder::class,
-            DatabaseSeeder::class,
             RoleAndPermissionSeeder::class,
+            DatabaseSeeder::class,
+            
 
         ]);
     }

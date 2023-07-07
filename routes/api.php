@@ -237,9 +237,6 @@ Route::post('/successStory', [SuccessStoriesController::class, 'addSucessStories
 //Add announcements
 Route::post('/announcements', [AnnouncementsController::class, 'announcements']);
 
-//Detele a product
-Route::delete('/product/{id}/{lang}', [ModifyItem::class, 'destroy']);
-
 //Delete a product from InterestedAt
 Route::delete('/deleteProduct/{id}/{lang}', [BuyerListController::class, 'deleteInterestedAT']);
 
