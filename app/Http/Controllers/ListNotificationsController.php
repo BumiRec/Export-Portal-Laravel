@@ -18,7 +18,7 @@ class ListNotificationsController extends Controller
     }
     public function showUnReadNotifications($id, $languageId)
     {
-        return response()->json($this->notificationService->showUnReadNotifications($id, $languageId), 200);
+        return response()->json($this->notificationService->showUnReadNotifications($id, $languageId));
     }
     public function markAsReadNotify($id, $languageId)
     {

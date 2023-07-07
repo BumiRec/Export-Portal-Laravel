@@ -6,18 +6,19 @@ use App\Http\Requests\FileRequest;
 use App\Models\FileHasProduct;
 use App\Models\FileHasType;
 use App\Models\FileUpload;
+use Illuminate\Support\Facades\Cache;
 
 class FileService
 {
+
     public function AddFile(FileRequest $request)
     {
-        $storedData = $request->session()->get('stored_data');
+        $productId = null;
+        $productId = Cache::get('productId');
 
-        if (!$storedData) {
-            return response()->json(['error' => __('messages.noStoredProduct')], 400);
+        if ($productId === null) {
+            return response()->json(['error' => 'Product ID is missing'], 400);
         }
-
-        $productId = $this->processData($storedData)['id'];
 
         $files = $request->file('files');
 
@@ -52,12 +53,6 @@ class FileService
             ]);
         }
         return response()->json(['message' => __('messages.FileUploaded')], 201);
-    }
-    private function processData($data)
-    {
-        $processedData = $data;
-
-        return $processedData;
     }
 
 }
