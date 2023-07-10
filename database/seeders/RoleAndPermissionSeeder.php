@@ -46,22 +46,23 @@ class RoleAndPermissionSeeder extends Seeder
         $announcementsUpdate = Permission::create(['name' => 'update-announcements']);
         $updateCategory      = Permission::create(['name' => 'update-category-for-company']);
         $updateCompanyStatus = Permission::create(['name' => 'update-company-status']);
-        $uploadFile          = Permission::create(['name' => 'upload-file']);
+        $adminUpdateUsers    = Permission::create(['name' => 'admin-update-user']);
+        $updateFile          = Permission::create(['name' => 'update-file']);
 
         //admin roles
-        $adminRole->givePermissionTo([$createCompany, $updateCompanyStatus, $addProduct, $sendNewsletter,
-            $searchUser, $addSuccessStories, $addAnnounements, $announcementsUpdate, $deleteCompany,
-            $uploadFile, $deleteProduct, $changePassword]);
+        $adminRole->givePermissionTo([$updateCompanyStatus, $addProduct, $sendNewsletter,
+            $searchUser, $addSuccessStories, $addAnnounements, $announcementsUpdate, $deleteCompany, 
+            $deleteProduct, $addFile, $adminUpdateUsers, $updateFile]);
 
         //owner roles
-        $ownerRole->givePermissionTo([$createCompany, $updateCompany, $sellConfirmed, $sellerList, $addFile,
-            $deleteFile, $changePassword, $updateCategory, $uploadFile]);
+        $ownerRole->givePermissionTo([$updateCompany, $sellConfirmed, $sellerList, $addFile,
+            $deleteFile, $updateCategory, $addProduct, $updateFile]);
 
         //user roles
-        $userRole->givePermissionTo([$createCompany, $updateCompany, $logout, $activityArea, $buyConfirmed,
+        $userRole->givePermissionTo([$createCompany, $logout, $activityArea, $buyConfirmed,
             $buyerList, $subscribeToNewsletter, $searchCompany, $searchProduct, $sendSupportEmail, $updateUser, $changePassword]);
 
-        $representativeRole->givePermissionTo([$createCompany, $updateCompany]);
+        $representativeRole->givePermissionTo([$updateCompany]);
 
     }
 }
