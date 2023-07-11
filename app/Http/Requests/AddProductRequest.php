@@ -25,7 +25,6 @@ class AddProductRequest extends FormRequest
             'name'           => 'required|string|max:255',
             'description'    => 'required|string|max:255',
             'price'          => 'required|numeric',
-            'imageURL'       => 'required|string|max:255',
             'type'           => 'required|string|max:255',
             'views'          => 'integer',
             'category_id'    => 'required|integer',

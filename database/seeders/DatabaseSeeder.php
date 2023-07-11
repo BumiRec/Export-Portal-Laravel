@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\ActivityArea;
 use App\Models\Company;
 use App\Models\Corporate;
 use App\Models\Countries;
@@ -12,7 +11,6 @@ use App\Models\Product;
 use App\Models\User;
 use App\Models\UserCompany;
 use Illuminate\Database\Seeder;
-
 
 class DatabaseSeeder extends Seeder
 {
@@ -36,7 +34,6 @@ class DatabaseSeeder extends Seeder
         // Seed the product table
         Product::factory(20)->create();
 
-        
         // comment this line when migrate seed for more then 1 time
         // or just migrate:fresh --seed
         User::factory(20)->create();
@@ -49,22 +46,9 @@ class DatabaseSeeder extends Seeder
 
         Corporate::factory(10)->create();
 
-        
-
         // usersToken::factory(20)->create();
 
         // \App\Models\User::factory(10)->create();
-
-        User::factory()->create([
-            'name'         => 'Test User',
-            'email'        => 'test@protonmail.ch',
-            'surname'      => 'nova',
-            'phone_number' => '+383',
-            'country_id'   => 1,
-            'gender'       => 'm',
-            'password'     => bcrypt('123'),
-        ]);
-
         UserCompany::factory(10)->create();
 
     }

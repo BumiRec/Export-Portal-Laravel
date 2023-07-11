@@ -11,5 +11,17 @@ class SellerConfirmation extends Model
 
     protected $table = 'seller_confirm';
 
-    protected $fillable = ['company_id', 'product_id', 'buyer_id', 'confirmation'];
+    protected $fillable = ['product_id', 'buyer_id', 'confirmation'];
+
+    public function product(){
+        return $this -> belongsTo(Product::class, 'product_id');
+    }
+
+    public function buyerConfirmation(){
+        return $this -> belongsTo(BuyerConfirmation::class, 'buyer_id');
+    }
+
+    public function transaction(){
+        return $this -> hasOne(Transaction::class, 'seller_id');
+    }
 }

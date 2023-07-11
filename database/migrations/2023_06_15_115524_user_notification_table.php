@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_notification', function (Blueprint $table) {
+        Schema::create('notification_system', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->uuid('notification_id');
-            $table->foreign('notification_id')->references('id')->on('notifications');
             $table->boolean('system');
             $table->timestamps();
         });

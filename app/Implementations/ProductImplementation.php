@@ -2,46 +2,30 @@
 
 namespace App\Implementations;
 
+use App\Events\ProductCreated;
 use App\Http\Requests\AddProductRequest;
 use App\Interfaces\ProductInterface;
 use App\Models\ExportProduct;
 use App\Models\ImportProduct;
 use App\Models\Product;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class ProductImplementation implements ProductInterface
 {
-
-    public function createProduct(AddProductRequest $addProductRequest): Product
+    public function createProduct(AddProductRequest $addProductRequest)
     {
-        // Check if the user is logged in
-        if (!Auth::check()) {
-            throw new \Exception ('User must be logged in to add a product.');
-        }
-
-        // Retrieve the authenticated user
-        $user    = Auth::user();
-        $product = Product::create(
-            [
-                'name'           => $addProductRequest['name'],
-                'description'    => $addProductRequest['description'],
-                'price'          => $addProductRequest['price'],
-                'imageURL'       => $addProductRequest['imageURL'],
-                'type'           => $addProductRequest['type'],
-                'views'          => $addProductRequest['views'],
-                'category_id'    => $addProductRequest['category_id'],
-                'subcategory_id' => $addProductRequest['subcategory_id'],
-                'company_id'     => $addProductRequest['company_id'],
-            ]
-        );
-        error_log($data = $product->toArray());
-
-        Session::put('stored_data', $data);
+        $product = Product::create([
+            'name'           => $addProductRequest['name'],
+            'description'    => $addProductRequest['description'],
+            'price'          => $addProductRequest['price'],
+            'type'           => $addProductRequest['type'],
+            'views'          => $addProductRequest['views'],
+            'category_id'    => $addProductRequest['category_id'],
+            'subcategory_id' => $addProductRequest['subcategory_id'],
+            'company_id'     => $addProductRequest['company_id'],
+        ]);
 
         $typeImportExport = $addProductRequest->type;
-
-        $productId = $product->id;
+        $productId        = $product->id;
 
         if ($typeImportExport == 'export') {
             $this->createExportProduct($productId);
@@ -49,14 +33,18 @@ class ProductImplementation implements ProductInterface
         if ($typeImportExport == 'import') {
             $this->createImportProduct($productId);
         }
+        event(new ProductCreated($productId));
+
         return $product;
     }
+
     public function createExportProduct($id): ExportProduct
     {
         return ExportProduct::create([
             'product_id' => $id,
         ]);
     }
+
     public function createImportProduct($id): ImportProduct
     {
         return ImportProduct::create([

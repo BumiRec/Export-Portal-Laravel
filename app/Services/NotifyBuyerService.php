@@ -12,7 +12,7 @@ class NotifyBuyerService
     {
         $changeLanguage = new ChangeLanguageService;
         $changeLanguage->changeLanguage($languageId);
-        
+
         $Owner   = User::find($Oid);
         $user    = User::find($Uid);
         $product = Product::find($Pid);

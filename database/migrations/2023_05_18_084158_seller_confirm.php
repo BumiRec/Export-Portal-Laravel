@@ -13,11 +13,9 @@ return new class extends Migration
     {
         Schema::create('seller_confirm', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('company_id');
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('buyer_id');
             $table->boolean('confirmation')->default(false);
-            $table->foreign('company_id')->references('id')->on('company');
             $table->foreign('product_id')->references('id')->on('product');
             $table->foreign('buyer_id')->references('id')->on('buyer_confirm');
             $table->timestamps();

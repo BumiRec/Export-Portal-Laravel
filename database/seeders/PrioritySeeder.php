@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Database\Seeders\FileTypeSeeder;
 use Illuminate\Database\Seeder;
 
 class PrioritySeeder extends Seeder
@@ -18,12 +17,13 @@ class PrioritySeeder extends Seeder
             CompanySubcategorySeeder::class,
             ProductSubcategorySeeder::class,
             ActivityAreaSeeder::class,
-            AdminSeeder::class,
+            // AdminSeeder::class,
             CountrySeeder::class,
             FileTypeSeeder::class,
             LanguageSeeder::class,
+            CompanyStatusSeeder::class,
+            RoleAndPermissionSeeder::class,
             DatabaseSeeder::class,
-            
         ]);
     }
 }

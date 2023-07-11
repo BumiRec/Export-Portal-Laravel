@@ -6,15 +6,19 @@ use App\Http\Requests\FileRequest;
 use App\Models\FileHasProduct;
 use App\Models\FileHasType;
 use App\Models\FileUpload;
+use Illuminate\Support\Facades\Cache;
 
 class FileService
 {
+
     public function AddFile(FileRequest $request)
     {
-        // $storedData = Session::get('stored_data');
+        $productId = null;
+        $productId = Cache::get('productId');
 
-        // if ($storedData) {
-        // $productId = $this->processData($storedData)
+        if ($productId === null) {
+            return response()->json(['error' => 'Product ID is missing'], 400);
+        }
 
         $files = $request->file('files');
 
@@ -22,13 +26,13 @@ class FileService
             $typeId        = $request->input('typeId')[$key];
             $filePath      = '';
             $fileExtension = $file->getClientOriginalExtension();
-            $imgMimes      = ['jpg', 'png', 'jpeg'];
+            $filesMimes    = ['jpg', 'png', 'jpeg', 'pdf'];
 
-            if ($typeId == 1 && in_array($fileExtension, $imgMimes)) {
+            if ($typeId == 1 && in_array($fileExtension, $filesMimes)) {
                 $filePath = $file->store('Images/cover', 'public');
-            } elseif ($typeId == 2 && in_array($fileExtension, $imgMimes)) {
+            } elseif ($typeId == 2 && in_array($fileExtension, $filesMimes)) {
                 $filePath = $file->store('Images/slide', 'public');
-            } elseif ($typeId == 3 && $fileExtension === 'pdf') {
+            } elseif ($typeId == 3 && in_array($fileExtension, $filesMimes)) {
                 $filePath = $file->store('Documents/pdf', 'public');
             } else {
                 return response()->json(['error' => __('messages.errorFile')], 400);
@@ -40,7 +44,7 @@ class FileService
 
             FileHasProduct::create([
                 'file_id'    => $uploadedFile->id,
-                'product_id' => 4,
+                'product_id' => $productId,
             ]);
 
             FileHasType::create([
@@ -50,18 +54,5 @@ class FileService
         }
         return response()->json(['message' => __('messages.FileUploaded')], 201);
     }
-    // private function processData($data)
-// {
-//     $processedData = [];
 
-//     foreach ($data as $item) {
-
-//         $processedItem = $item;
-
-//         $processedData[] = $processedItem;
-//     }
-
-//     return $processedData;
-// }
-// }
 }

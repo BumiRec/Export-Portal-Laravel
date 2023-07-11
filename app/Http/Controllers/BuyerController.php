@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BuyerRequest;
-use App\Http\Requests\InterestedInRequest;
+use App\Http\Requests\SellerListRequest;
 use App\Interfaces\BuyerInterface;
-use App\Interfaces\InterestedInterface;
+use App\Interfaces\SellerListInterface;
 
 class BuyerController extends Controller
 {
@@ -16,16 +16,12 @@ class BuyerController extends Controller
     {
         $this->buyerInterface = $buyerInterface;
     }
-    public function buyerConfirmation(BuyerRequest $buyerRequest, BuyerInterface $buyerInterface,
-        InterestedInterface $interestedInterface, InterestedInRequest $interestedInRequest) {
+    public function buyerConfirmation(BuyerRequest $buyerRequest, BuyerInterface $buyerInterface) {
 
         $buyer = $this->buyerInterface->createBuyer($buyerRequest);
 
-        $confirm = $buyerRequest->confirmation;
-        if ($confirm === true) {
-
-            $interestedInterface->createInterestedIn($interestedInRequest);
-        }
-        return response()->json(['buyer' => $buyer, $confirm], 201);
+        // $confirm = $buyerRequest->confirmation;
+       
+        return response()->json(['buyer' => $buyer], 201);
     }
 }

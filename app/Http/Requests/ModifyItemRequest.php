@@ -25,7 +25,6 @@ class ModifyItemRequest extends FormRequest
             'name'        => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'price'       => 'required|numeric',
-            'imageURL'    => 'required|string|max:255',
             // 'image' => 'required|image'
         ];
     }
