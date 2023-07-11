@@ -190,7 +190,7 @@ Route::group(['middleware' => ['auth:sanctum', 'role:owner']], function () {
 });
 
 //? User 
-Route::group(['middleware' => ['auth:sanctum', 'role:user', 'approved']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'role:user']], function () {
 
     //Logout
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
