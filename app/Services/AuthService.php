@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Http\Requests\AuthRequest;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Sanctum\PersonalAccessTokenResult;
 
 class AuthService
 {
@@ -15,9 +16,13 @@ class AuthService
 
             $user = Auth::user();
 
+            /** @var PersonalAccessTokenResult $tokenResult */
+            $tokenResult = $user->createToken('auth_token');
+
             $responseData = [
                 'message' => __('messages.welcome'),
                 'user'    => $user,
+                'token'   => $tokenResult->plainTextToken,
             ];
 
             return $responseData;

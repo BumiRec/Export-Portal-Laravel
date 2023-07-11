@@ -25,19 +25,34 @@ class FileUpdateDeleteImplementation implements FileUpdateDeleteInterface
         $existingFilePath = public_path('storage/' . $fileData->URL);
         File::delete($existingFilePath);
 
-        $typeId        = $request->typeId;
-        $filePath      = '';
-        $fileExtension = $request->file('files')->getClientOriginalExtension();
-        $imgMimes      = ['jpg', 'png', 'jpeg'];
+        $typeId    = $request->typeId;
+        $filePaths = [];
+        $files     = $request->file('files');
 
-        if ($typeId == 1 && in_array($fileExtension, $imgMimes)) {
-            $filePath = $request->file('files')->store('Images/cover', 'public');
-        } elseif ($typeId == 2 && in_array($fileExtension, $imgMimes)) {
-            $filePath = $request->file('files')->store('Images/slide', 'public');
-        } elseif ($typeId == 3 && $fileExtension === 'pdf') {
-            $filePath = $request->file('files')->store('Documents/pdf', 'public');
+        if ($request->hasFile('files')) {
+            $imgMimes = ['jpg', 'png', 'jpeg'];
+
+            foreach ($files as $file) {
+                if ($file->isValid()) {
+                    $fileExtension = $file->getClientOriginalExtension();
+
+                    if ($typeId == 1 && in_array($fileExtension, $imgMimes)) {
+                        $filePath = $file->store('Images/cover', 'public');
+                    } elseif ($typeId == 2 && in_array($fileExtension, $imgMimes)) {
+                        $filePath = $file->store('Images/slide', 'public');
+                    } elseif ($typeId == 3 && $fileExtension === 'pdf') {
+                        $filePath = $file->store('Documents/pdf', 'public');
+                    } else {
+                        return response()->json(['error' => __('messages.errorFile')], 400);
+                    }
+
+                    $filePaths[] = $filePath;
+                } else {
+                    return response()->json(['error' => __('messages.invalidFile')], 400);
+                }
+            }
         } else {
-            return response()->json(['error' => __('messages.errorFile')], 400);
+            return response()->json(['error' => __('messages.noFiles')], 400);
         }
 
         $fileData->URL = $filePath;

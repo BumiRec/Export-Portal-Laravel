@@ -133,10 +133,8 @@ Route::post('/searchCompany', [SearchController::class, 'companySearch']);
 //Search for product
 Route::post('/searchProduct', [SearchController::class, 'productSearch']);
 
-//Login
-Route::post('/login', [AuthController::class, 'login']);
-
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/CompanyList', [CompanyListController::class, 'companyList']);
 //Update product
     Route::put('/product/{id}', [ModifyItem::class, 'update']);
 
@@ -149,10 +147,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/updateFile/{id}', [FileUpdateDeleteController::class, 'updateFile']);
 
 //Logout
-    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+    Route::post('/logout/{languageId}', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
 //Create a new company
-    Route::post('/company/{userId}', [CompanyController::class, 'company']);
 
 //Activity area for comapany
     Route::post('/activity/{lang}', [ActivityController::class, 'activitycontroller']);
@@ -197,11 +194,21 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/deleteFile/{id}/{lang}', [FileUpdateDeleteController::class, 'deleteFile']);
 
 });
+Route::middleware('api')->group(function () {
+    Route::post('/login', [AuthController::class, 'login']);
+    // Other routes...
+});
+Route::post('/company/{userId}', [CompanyController::class, 'company'])
+    ->name('company')
+    ->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
+})->name('user');
 
 Route::get('/', function () {
     return view('welcome');
+});
+Route::middleware('web')->get('/sanctum/csrf-cookie', function (Request $request) {
+    return response()->json(['message' => 'CSRF cookie set']);
 });
