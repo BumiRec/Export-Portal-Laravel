@@ -21,7 +21,6 @@ class AuthService
             $langaugeId     = UserLanguage::whereBelongsTo($user)->get('language_id');
             $notificationId = NotificationSystem::where('user_id', $user->id)->value('system');
 
-            /** @var PersonalAccessTokenResult $tokenResult */
             $tokenResult = $user->createToken('auth_token');
 
             $responseData = [
