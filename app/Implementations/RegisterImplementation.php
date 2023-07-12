@@ -2,17 +2,14 @@
 
 namespace App\Implementations;
 
-use App\Events\AssignUserRole;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\UsersTokenRequest;
 use App\Interfaces\RegisterInterface;
-use App\Models\RolesUser;
+use App\Models\NotificationSystem;
 use App\Models\Token;
 use App\Models\User;
 use App\Models\UserLanguage;
-use App\Models\NotificationSystem;
 use App\Models\UsersToken;
-use Spatie\Permission\Models\Role;
 
 class RegisterImplementation implements RegisterInterface
 {
@@ -26,6 +23,7 @@ class RegisterImplementation implements RegisterInterface
             'phone_number' => $registerRequest->phone_number,
             'country_id'   => $registerRequest->country_id,
             'gender'       => $registerRequest->gender,
+            'type'         => $registerRequest->type,
         ]);
 
         if ($user) {
@@ -51,7 +49,7 @@ class RegisterImplementation implements RegisterInterface
             // RolesUser::create([
             //     'user_id' => $user->id,
             //     'roles_id'  => 2,
-            // ]);     
+            // ]);
 
             // User::find($user->id);
             // $user->assignRole(1);

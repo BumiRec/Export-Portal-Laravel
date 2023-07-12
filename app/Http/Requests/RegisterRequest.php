@@ -30,6 +30,7 @@ class RegisterRequest extends FormRequest
             'country_id'   => 'required|integer',
             'gender'       => 'required|string|max:255',
             'agreements'   => 'required|boolean:true,false',
+            'type'         => 'required|string|max:255',
         ];
     }
 }

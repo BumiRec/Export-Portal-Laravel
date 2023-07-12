@@ -23,7 +23,6 @@ use App\Http\Controllers\MailFormController;
 use App\Http\Controllers\ManageCompaniesController;
 use App\Http\Controllers\ModifyItem;
 use App\Http\Controllers\NewsletterController;
-use App\Http\Controllers\NotificationsByAdminController;
 use App\Http\Controllers\NotificationSystemController;
 use App\Http\Controllers\NotifyBuyerInterested;
 use App\Http\Controllers\PasswordController;
@@ -100,10 +99,8 @@ Route::get('/filterCompany/{id}', [CompanyFilterController::class, 'filterCompan
 
 Route::get('/filterProduct/{id}', [FilterProductController::class, 'filterProductCategory']);
 
-
 //!Getting data for the "Form" communication
 Route::get('/form/{id}', [MailFormController::class, 'mailForm']);
-
 
 // Route::get('/showAllNotifyByAdmin/{id}/{lang}', [NotificationsByAdminController::class, 'showAllNotifyByAdmin']);
 
@@ -124,9 +121,6 @@ Route::get('/showFiles/{productId}/{fileType}', [FileGetDataController::class, '
 //Update Language
 Route::get('/updateLanguage/{userId}/{languageId}', [UpdateLanguageController::class, 'updateLanguage']);
 
-//!Update product
-Route::put('/product/{id}', [ModifyItem::class, 'update']);
-
 //Updating Token
 Route::put('/updateToken/{id}/{lang}', [TokenController::class, 'updateToken']);
 
@@ -135,7 +129,6 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 //Login
 Route::post('/login', [AuthController::class, 'login']);
-
 
 //? Admin
 Route::group(['middleware' => ['auth:sanctum', 'role:admin']], function () {
@@ -189,7 +182,7 @@ Route::group(['middleware' => ['auth:sanctum', 'role:owner']], function () {
 
 });
 
-//? User 
+//? User
 Route::group(['middleware' => ['auth:sanctum', 'role:user']], function () {
 
     //Logout
@@ -271,6 +264,9 @@ Route::group(['middleware' => ['auth:sanctum', 'role:admin|owner']], function ()
 
     //Add a new product
     Route::post('/add', [AddProduct::class, 'AddProduct']);
+
+    //Update product
+    Route::put('/product/{id}', [ModifyItem::class, 'update']);
 
     Route::post('/addFile', [FileController::class, 'addFile']);
 

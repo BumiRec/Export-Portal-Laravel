@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('country_id');
             $table->string('gender');
             $table->boolean('agreements')->default(false);
+            $table->string('type');
             $table->rememberToken();
             $table->timestamps();
         });

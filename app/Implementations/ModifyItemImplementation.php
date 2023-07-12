@@ -16,7 +16,6 @@ class ModifyItemImplementation implements ModifyItemInterface
         $product->name        = $modifyItemRequest['name'];
         $product->description = $modifyItemRequest['description'];
         $product->price       = $modifyItemRequest['price'];
-        $product->imageURL    = $modifyItemRequest['imageURL'];
         $product->save();
 
         return $product;

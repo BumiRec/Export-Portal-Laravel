@@ -30,6 +30,7 @@ class UserFactory extends Factory
             'gender'            => $this->faker->randomElement(['male', 'female']),
             'agreements'        => $this->faker->boolean(),
             'remember_token'    => Str::random(10),
+            'type'              => $this->faker->randomElement(['import', 'export']),
         ];
     }
 
