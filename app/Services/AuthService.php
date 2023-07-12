@@ -2,6 +2,8 @@
 namespace App\Services;
 
 use App\Http\Requests\AuthRequest;
+use App\Models\NotificationSystem;
+use App\Models\UserLanguage;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\PersonalAccessTokenResult;
 
@@ -16,6 +18,9 @@ class AuthService
 
             $user = Auth::user();
 
+            $langaugeId     = UserLanguage::whereBelongsTo($user)->get('language_id');
+            $notificationId = NotificationSystem::where('user_id', $user->id)->value('system');
+
             /** @var PersonalAccessTokenResult $tokenResult */
             $tokenResult = $user->createToken('auth_token');
 
@@ -23,6 +28,8 @@ class AuthService
                 'message' => __('messages.welcome'),
                 'user'    => $user,
                 'token'   => $tokenResult->plainTextToken,
+                'language_id'    => $langaugeId,
+                'notificationId' => $notificationId,
             ];
 
             return $responseData;
