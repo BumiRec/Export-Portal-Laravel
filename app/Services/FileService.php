@@ -26,13 +26,13 @@ class FileService
             $typeId        = $request->input('typeId')[$key];
             $filePath      = '';
             $fileExtension = $file->getClientOriginalExtension();
-            $filesMimes    = ['jpg', 'png', 'jpeg', 'pdf'];
+            $filesMimes    = ['jpg', 'png', 'jpeg'];
 
             if ($typeId == 1 && in_array($fileExtension, $filesMimes)) {
                 $filePath = $file->store('Images/cover', 'public');
             } elseif ($typeId == 2 && in_array($fileExtension, $filesMimes)) {
                 $filePath = $file->store('Images/slide', 'public');
-            } elseif ($typeId == 3 && in_array($fileExtension, $filesMimes)) {
+            } elseif ($typeId == 3 && $fileExtension === 'pdf') {
                 $filePath = $file->store('Documents/pdf', 'public');
             } else {
                 return response()->json(['error' => __('messages.errorFile')], 400);
