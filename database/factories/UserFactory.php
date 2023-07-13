@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Countries;
+use App\Models\Prefix;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -20,15 +20,11 @@ class UserFactory extends Factory
     {
         return [
             'name'              => fake()->name(),
-            'surname'           => fake()->name(),
             'email'             => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             // password
             'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-            'phone_number'      => fake()->phoneNumber(),
-            'country_id'        => Countries::factory()->create()->id,
-            'gender'            => $this->faker->randomElement(['male', 'female']),
-            'agreements'        => $this->faker->boolean(),
+            'prefix_id'         => Prefix::inRandomOrder()->first()->id,
             'remember_token'    => Str::random(10),
             'type'              => $this->faker->randomElement(['import', 'export']),
         ];

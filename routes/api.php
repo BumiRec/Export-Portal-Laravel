@@ -57,6 +57,9 @@ use Illuminate\Support\Facades\Route;
 //Country list
 Route::get('/country', [RegisterController::class, 'index']);
 
+
+Route::get('/prefix', [RegisterController::class, 'prefixes']);
+
 //Route for import list
 Route::get('/ilist', [ImportProduct::class, 'import']);
 

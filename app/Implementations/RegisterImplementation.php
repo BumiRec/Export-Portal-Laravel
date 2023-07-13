@@ -6,6 +6,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\UsersTokenRequest;
 use App\Interfaces\RegisterInterface;
 use App\Models\NotificationSystem;
+use App\Models\Prefix;
 use App\Models\Token;
 use App\Models\User;
 use App\Models\UserLanguage;
@@ -16,14 +17,11 @@ class RegisterImplementation implements RegisterInterface
     public function userRegister(RegisterRequest $registerRequest, UsersTokenRequest $usersTokenRequest): User
     {
         $user = User::create([
-            'name'         => $registerRequest->name,
-            'surname'      => $registerRequest->surname,
-            'email'        => $registerRequest->email,
-            'password'     => bcrypt($registerRequest->password),
-            'phone_number' => $registerRequest->phone_number,
-            'country_id'   => $registerRequest->country_id,
-            'gender'       => $registerRequest->gender,
-            'type'         => $registerRequest->type,
+            'name'      => $registerRequest->name,
+            'email'     => $registerRequest->email,
+            'password'  => bcrypt($registerRequest->password),
+            'prefix_id' => $registerRequest->phone_number,
+            'type'      => $registerRequest->type,
         ]);
 
         if ($user) {
@@ -57,5 +55,10 @@ class RegisterImplementation implements RegisterInterface
         }
 
         return $user;
+    }
+
+    public function showPrefixes():Prefix
+    {
+        return Prefix::get(['prefix', 'country']);
     }
 }
