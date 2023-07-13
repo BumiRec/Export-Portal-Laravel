@@ -23,9 +23,14 @@ class ForgotPasswordRequest extends FormRequest
     {
 
         return [
-            'email' =>'required|string',
-            'newPassword' => 'required|string|min:8',
-            'confirmPassword' => 'required|string|min:8'
+            'email' =>'required|email',
+            'newPassword' => [
+                'required',
+                'string',
+                'min:8',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
+            ],
+            'confirmPassword' => 'required|string|same:newPassword'
         ];
     }
 }
