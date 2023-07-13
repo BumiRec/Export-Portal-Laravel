@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->unsignedBigInteger('prefix_id');
-            $table->foreign('prefix_id')->references('id')->on('prefixes');
+            $table->string('prefix');
+            // $table->foreign('prefix')->references('id')->on('prefixes');
+            $table->string('phone_number');
             $table->string('type');
             $table->rememberToken();
             $table->timestamps();

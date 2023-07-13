@@ -17,11 +17,12 @@ class RegisterImplementation implements RegisterInterface
     public function userRegister(RegisterRequest $registerRequest, UsersTokenRequest $usersTokenRequest): User
     {
         $user = User::create([
-            'name'      => $registerRequest->name,
-            'email'     => $registerRequest->email,
-            'password'  => bcrypt($registerRequest->password),
-            'prefix_id' => $registerRequest->phone_number,
-            'type'      => $registerRequest->type,
+            'name'         => $registerRequest->name,
+            'email'        => $registerRequest->email,
+            'password'     => bcrypt($registerRequest->password),
+            'prefix'       => $registerRequest->prefix,
+            'phone_number' => $registerRequest->phone_number,
+            'type'         => $registerRequest->type,
         ]);
 
         if ($user) {
