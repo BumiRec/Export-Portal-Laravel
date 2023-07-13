@@ -13,7 +13,7 @@ class SummaryInformationService
         return UserCompany::join('users as u', 'u.id', 'user_company.user_id')
             ->join('company as c', 'c.id', 'user_company.company_id')
             ->where('company_id', $companyId)
-            ->get(['u.name', 'u.surname', 'u.email', 'u.phone_number', 'u.country_id', 'u.gender']);
+            ->get(['u.name', 'u.email', 'u.phone_number']);
     }
 
     public function showCompanyData($userId)
@@ -50,10 +50,10 @@ class SummaryInformationService
         //     ->get(['c.id', 'c.name']);
     }
 
-    public function userData($userId){
-        return User::join('countries as c', 'users.country_id', 'c.id')
-        ->where('users.id', $userId)
-        ->get([ 'users.name', 'users.surname', 'users.email', 'users.phone_number', 'c.country', 'users.gender']);
-    }
+    // public function userData($userId){
+    //     return User::join('countries as c', 'users.country_id', 'c.id')
+    //     ->where('users.id', $userId)
+    //     ->get([ 'users.name', 'users.email', 'users.phone_number', 'c.country', 'users.gender']);
+    // }
 }
  

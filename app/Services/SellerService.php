@@ -21,7 +21,6 @@ class SellerService
                 'product.description',
                 'product.price',
                 'users.name as user_name',
-                'users.surname as user_surname'
             ]);
     }
 
