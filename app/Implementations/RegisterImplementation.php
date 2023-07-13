@@ -57,7 +57,7 @@ class RegisterImplementation implements RegisterInterface
         return $user;
     }
 
-    public function showPrefixes():Prefix
+    public function showPrefixes()
     {
         return Prefix::get(['prefix', 'country']);
     }

@@ -10,5 +10,5 @@ interface RegisterInterface
 
     public function userRegister(RegisterRequest $registerRequest, UsersTokenRequest $usersTokenRequest):User;
 
-    public function showPrefixes():Prefix;
+    public function showPrefixes();
 }
