@@ -22,7 +22,8 @@ class PrioritySeeder extends Seeder
             FileTypeSeeder::class,
             LanguageSeeder::class,
             CompanyStatusSeeder::class,
-            RoleAndPermissionSeeder::class,
+            PrefixSeeder::class,
+            RoleAndPermissionSeeder::class,            
             DatabaseSeeder::class,
         ]);
     }

@@ -6,8 +6,8 @@ namespace App\Models;
 use App\Models\Company;
 use App\Models\Language;
 use App\Models\Notification;
-use App\Models\UsersToken;
 use App\Models\Role;
+use App\Models\UsersToken;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -34,14 +34,9 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name',
-        'surname',
         'email',
         'password',
-        'password',
-        'phone_number',
-        'country_id',
-        'gender',
-        'agreements',
+        'prefix_id',
         'type',
     ];
 
@@ -83,17 +78,16 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class, 'roles_user', 'user_id', 'roles_id');
     }
-
-    public function country()
-    {
-        return $this->belongsTo(Countries::class, 'country_id');
-    }
-
+    
     public function userToken()
     {
         return $this->hasOne(UsersToken::class, 'user_id');
     }
 
+    public function prefix()
+    {
+        return $this->hasOne(Prefix::class, 'prefix_id');
+    }
     protected static function boot()
     {
         parent::boot();
@@ -102,6 +96,5 @@ class User extends Authenticatable
             $user->roles()->attach(1);
         });
     }
-
 
 }
