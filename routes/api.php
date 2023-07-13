@@ -17,6 +17,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\FileGetDataController;
 use App\Http\Controllers\FileUpdateDeleteController;
 use App\Http\Controllers\FilterProductController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ImportProduct;
 use App\Http\Controllers\ListNotificationsController;
 use App\Http\Controllers\MailFormController;
@@ -101,7 +102,7 @@ Route::get('/filterCompany/{id}', [CompanyFilterController::class, 'filterCompan
 Route::get('/filterProduct/{id}', [FilterProductController::class, 'filterProductCategory']);
 
 
-//!Getting data for the "Form" communication
+//Getting data for the "Form" communication
 Route::get('/form/{id}', [MailFormController::class, 'mailForm']);
 
 
@@ -136,6 +137,10 @@ Route::post('/register', [RegisterController::class, 'register']);
 //Login
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::post('/forgotPassword', [ForgotPasswordController::class, 'sendEmail']);
+
+Route::post('/changePassword1', [ForgotPasswordController::class, 'changePassword']);
+ 
 
 //? Admin
 Route::group(['middleware' => ['auth:sanctum', 'role:admin']], function () {
